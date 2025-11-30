@@ -1,0 +1,18 @@
+# Core
+numpy>=1.24
+pandas>=2.0
+pyarrow>=13.0
+scipy>=1.11
+joblib>=1.3
+
+# Visualization
+matplotlib>=3.7
+seaborn>=0.12
+plotly>=5.20
+
+# Machine Learning / Modeling
+scikit-learn>=1.3
+pulp>=2.7
+
+# Optional utilities
+yaml>=0.2  # if yaml parsing via libyaml is needed
