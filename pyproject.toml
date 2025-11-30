@@ -1,0 +1,50 @@
+[project]
+name = "supply-chain-data-notebooks"
+version = "0.1.0"
+description = "Playground de notebooks para supply chain y operaciones"
+authors = [{name = "lraigosov"}]
+requires-python = ">=3.11"
+readme = "README.md"
+
+[tool.pdm]
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project.optional-dependencies]
+notebooks = [
+  "jupyter",
+  "papermill",
+  "nbconvert",
+]
+core = [
+  "pandas",
+  "numpy",
+  "pyarrow",
+  "openpyxl",
+  "matplotlib",
+  "seaborn",
+  "plotly",
+  "scikit-learn",
+  "statsmodels",
+  "scipy",
+  "networkx",
+  "pyyaml",
+]
+or = [
+  "pulp",
+  "ortools",
+]
+iot = [
+  "kafka-python",
+]
+web = [
+  "fastapi",
+  "uvicorn",
+]
+flow = [
+  "prefect",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]

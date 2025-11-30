@@ -1,0 +1,17 @@
+notebooks:
+  - id: "DE-01"
+    title: "Batch ingestion from WMS CSV to Data Warehouse"
+    specialty: "Data Engineering"
+    process: "Deliver"
+    level: "Intermediate"
+    tags: [etl, warehouse, inventory, python, sql]
+    path: notebooks/10_data_engineering/DE-01-ingesta.ipynb
+    dataset_deps: [products.csv, orders.csv, inventory.csv]
+  - id: "DS-01"
+    title: "EDA de órdenes e inventarios"
+    specialty: "Data Science"
+    process: "Deliver"
+    level: "Intro"
+    tags: [eda, pandas, plot]
+    path: notebooks/30_data_science_ml/DS-01-eda.ipynb
+    dataset_deps: [orders.csv, inventory.csv]
