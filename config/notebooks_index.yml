@@ -7,63 +7,23 @@ notebooks:
     tags: [etl, warehouse, inventory, python, sql]
     path: notebooks/10_data_engineering/DE-01-ingesta.ipynb
     dataset_deps: [products.csv, orders.csv, inventory.csv]
+  - id: "DE-02"
+    title: "Pipeline incremental de órdenes desde ERP"
+    specialty: "Data Engineering"
+    process: "Source"
+    level: "Intermediate"
+    tags: [pipeline, incremental, orders]
+    path: notebooks/10_data_engineering/DE-02-pipeline_incremental.ipynb
+    dataset_deps: [orders.csv]
+  - id: "DA-01"
+    title: "Diseño de modelo dimensional para inventarios"
+    specialty: "Data Architecture"
+    process: "Enable"
+    level: "Intro"
+    tags: [dimensional, inventarios]
+    path: notebooks/20_data_architecture/DA-01-modelo_dimensional.ipynb
+    dataset_deps: [inventory.csv, products.csv]
   - id: "DS-01"
-      - id: "DA-01"
-        title: "Diseño de modelo dimensional para inventarios"
-        specialty: "Data Architecture"
-        process: "Enable"
-        level: "Intro"
-        tags: [dimensional, inventarios]
-        path: notebooks/20_data_architecture/DA-01-modelo_dimensional.ipynb
-        dataset_deps: [inventory.csv, products.csv]
-      - id: "BA-01"
-        title: "Dashboard de OTIF por cliente y región"
-        specialty: "Business Analytics"
-        process: "Deliver"
-        level: "Intro"
-        tags: [dashboard, otif, plotly]
-        path: notebooks/40_business_analytics_bi/BA-01-dashboard_otif.ipynb
-        dataset_deps: [orders.csv]
-      - id: "OR-01"
-        title: "Cálculo de stock de seguridad"
-        specialty: "Optimization & OR"
-        process: "Make"
-        level: "Intro"
-        tags: [or, inventory]
-        path: notebooks/50_optimization_or/OR-01-stock_seguridad.ipynb
-        dataset_deps: [orders.csv]
-      - id: "RT-01"
-        title: "Simulación de stream de tracking"
-        specialty: "Realtime & IoT"
-        process: "Deliver"
-        level: "Intro"
-        tags: [stream, tracking]
-        path: notebooks/60_realtime_iot/RT-01-stream_tracking.ipynb
-        dataset_deps: [transport_events.csv]
-      - id: "GEN-01"
-        title: "RAG para KPIs logísticos (mock)"
-        specialty: "AI Generativa"
-        process: "Enable"
-        level: "Intro"
-        tags: [rag, kpi]
-        path: notebooks/70_ai_gen_agents/GEN-01-rag_kpi.ipynb
-        dataset_deps: []
-      - id: "DG-01"
-        title: "Perfilado de calidad de datos maestro"
-        specialty: "Data Governance"
-        process: "Enable"
-        level: "Intro"
-        tags: [quality, profiling]
-        path: notebooks/80_governance_quality/DG-01-perfilado_calidad.ipynb
-        dataset_deps: [products.csv]
-      - id: "CAP-01"
-        title: "Torre de control (demo simple)"
-        specialty: "Capstone"
-        process: "Deliver"
-        level: "Intro"
-        tags: [capstone, dashboard]
-        path: notebooks/90_capstone_end2end/CAP-01-torre_control.ipynb
-        dataset_deps: [orders.csv]
     title: "EDA de órdenes e inventarios"
     specialty: "Data Science"
     process: "Deliver"
@@ -71,3 +31,67 @@ notebooks:
     tags: [eda, pandas, plot]
     path: notebooks/30_data_science_ml/DS-01-eda.ipynb
     dataset_deps: [orders.csv, inventory.csv]
+  - id: "DS-02"
+    title: "Detección de estacionalidad en demanda"
+    specialty: "Data Science"
+    process: "Plan"
+    level: "Intermediate"
+    tags: [seasonality, forecast, statsmodels]
+    path: notebooks/30_data_science_ml/DS-02-estacionalidad.ipynb
+    dataset_deps: [orders.csv]
+  - id: "BA-01"
+    title: "Dashboard de OTIF por cliente y región"
+    specialty: "Business Analytics"
+    process: "Deliver"
+    level: "Intro"
+    tags: [dashboard, otif, plotly]
+    path: notebooks/40_business_analytics_bi/BA-01-dashboard_otif.ipynb
+    dataset_deps: [orders.csv]
+  - id: "OR-01"
+    title: "Cálculo de stock de seguridad"
+    specialty: "Optimization & OR"
+    process: "Make"
+    level: "Intro"
+    tags: [or, inventory]
+    path: notebooks/50_optimization_or/OR-01-stock_seguridad.ipynb
+    dataset_deps: [orders.csv]
+  - id: "OR-02"
+    title: "Optimización de políticas (s,Q) de inventario"
+    specialty: "Optimization & OR"
+    process: "Make"
+    level: "Intermediate"
+    tags: [or, inventory, pulp]
+    path: notebooks/50_optimization_or/OR-02-politicas_inventario.ipynb
+    dataset_deps: [orders.csv]
+  - id: "RT-01"
+    title: "Simulación de stream de tracking"
+    specialty: "Realtime & IoT"
+    process: "Deliver"
+    level: "Intro"
+    tags: [stream, tracking]
+    path: notebooks/60_realtime_iot/RT-01-stream_tracking.ipynb
+    dataset_deps: [transport_events.csv]
+  - id: "GEN-01"
+    title: "RAG para KPIs logísticos (mock)"
+    specialty: "AI Generativa"
+    process: "Enable"
+    level: "Intro"
+    tags: [rag, kpi]
+    path: notebooks/70_ai_gen_agents/GEN-01-rag_kpi.ipynb
+    dataset_deps: []
+  - id: "DG-01"
+    title: "Perfilado de calidad de datos maestro"
+    specialty: "Data Governance"
+    process: "Enable"
+    level: "Intro"
+    tags: [quality, profiling]
+    path: notebooks/80_governance_quality/DG-01-perfilado_calidad.ipynb
+    dataset_deps: [products.csv]
+  - id: "CAP-01"
+    title: "Torre de control (demo simple)"
+    specialty: "Capstone"
+    process: "Deliver"
+    level: "Intro"
+    tags: [capstone, dashboard]
+    path: notebooks/90_capstone_end2end/CAP-01-torre_control.ipynb
+    dataset_deps: [orders.csv]

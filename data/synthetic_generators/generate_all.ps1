@@ -3,7 +3,7 @@ $ErrorActionPreference = "Stop"
 
 Write-Host "Generating synthetic datasets..."
 
-python - << 'PY'
+$pythonCode = @'
 import pandas as pd
 import numpy as np
 from pathlib import Path
@@ -75,6 +75,8 @@ trans = pd.DataFrame(trans)
 trans.to_csv(raw / 'transport_events.csv', index=False)
 
 print('Done: products, locations, calendar, orders, inventory, transport_events')
-PY
+'@
+
+python -c $pythonCode
 
 Write-Host "Synthetic datasets generated under data/raw"
