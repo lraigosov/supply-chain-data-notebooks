@@ -3,7 +3,7 @@ name = "supply-chain-data-notebooks"
 version = "0.1.0"
 description = "Playground de notebooks para supply chain y operaciones"
 authors = [{name = "lraigosov"}]
-requires-python = ">=3.11"
+requires-python = ">=3.10"
 readme = "README.md"
 
 [tool.pdm]
