@@ -1,6 +1,6 @@
 # Catálogo de Casos de Uso
 
-Este catálogo lista todos los notebooks implementados en el repositorio, organizados por especialidad.
+Catálogo de los notebooks presentes en el repositorio, organizados por especialidad. Se basa en el contenido real de `notebooks/`.
 
 ## 10_data_engineering/
 
@@ -10,7 +10,7 @@ Este catálogo lista todos los notebooks implementados en el repositorio, organi
 - **Datasets:** products.csv, orders.csv, inventory.csv
 - **Tiempo estimado:** 45 min
 
-### DE-02: Pipeline incremental de órdenes desde ERP
+### DE-02: Pipeline incremental de órdenes
 - **Nivel:** Intermedio
 - **Tags:** pipeline, incremental, orders
 - **Datasets:** orders.csv
@@ -65,7 +65,7 @@ Este catálogo lista todos los notebooks implementados en el repositorio, organi
 
 ## 60_realtime_iot/
 
-### RT-01: Simulación de stream de tracking GPS con geofencing
+### RT-01: Simulación de stream de tracking GPS
 - **Nivel:** Intro
 - **Tags:** stream, tracking, iot, async, geofencing
 - **Datasets:** Genera datos sintéticos internos
@@ -106,4 +106,4 @@ Este catálogo lista todos los notebooks implementados en el repositorio, organi
 
 ---
 
-**Fuente de verdad:** Este catálogo se basa en `config/notebooks_index.yml`
+**Referencia:** `config/notebooks_index.yml`
