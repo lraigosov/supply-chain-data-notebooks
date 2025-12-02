@@ -5,20 +5,29 @@
 Repositorio de notebooks ejecutables que demuestran aplicaciones prácticas de análisis de datos, machine learning, optimización y arquitectura de datos en problemas reales de logística y operaciones.
 
 ## 📊 Estado Actual
-- ✅ **6 notebooks completos** con casos de negocio realistas
+- ✅ **16 notebooks implementados** con casos de negocio realistas
 - ✅ **Datos sintéticos** generados (200 SKUs, 30 ubicaciones, 8500+ órdenes)
-- ✅ **5 especialidades cubiertas:** Data Engineering, Data Architecture, Data Science, Business Analytics, Optimization & OR
+- ✅ **9 especialidades cubiertas:** Data Engineering, Data Architecture, Data Science, Business Analytics, Optimization & OR, Real-time & IoT, AI Generativa, Data Governance, Capstone
 
-### Notebooks Disponibles
+### Notebooks Implementados
 
 | ID | Título | Especialidad | Nivel | Tiempo |
 |----|--------|--------------|-------|--------|
 | **DE-01** | Ingesta batch desde WMS a DWH | Data Engineering | Intermedio | 45 min |
+| **DE-02** | Pipeline incremental de órdenes | Data Engineering | Intermedio | - |
 | **DA-01** | Modelo dimensional para inventarios | Data Architecture | Intermedio | 60 min |
 | **DS-01** | EDA de órdenes e inventarios | Data Science | Intro | 40 min |
+| **DS-02** | Detección de estacionalidad en demanda | Data Science | Intermedio | - |
 | **BA-01** | Dashboard OTIF (On-Time In-Full) | Business Analytics | Intermedio | 50 min |
 | **OR-01** | Cálculo de stock de seguridad | Optimization & OR | Intermedio | 55 min |
+| **OR-02** | Políticas de inventario | Optimization & OR | Intermedio | - |
 | **OR-02** | VRP con restricción de capacidad | Optimization & OR | Avanzado | 65 min |
+| **RT-01** | Simulación de stream de tracking | Real-time & IoT | Intro | - |
+| **GEN-01** | RAG para consultas de KPIs | AI Generativa | Avanzado | 60 min |
+| **DG-01** | Perfilado de calidad de datos maestro | Data Governance | Intermedio | - |
+| **CAP-01** | Torre de control (dashboard integrado) | Capstone | Intermedio | - |
+| **AP-01** | Apply en DataFrames (tutorial pandas) | Utilidades | Intro | - |
+| **SI-09** | Flujo ML end-to-end | Utilidades | Intermedio | - |
 
 Cada notebook incluye:
 - 📋 **Contexto de negocio real** (retail, farmacéutica, logística)
@@ -77,21 +86,12 @@ jupyter notebook
 └── docs/                  # Documentación adicional
 ```
 
-Ver `bases/contenido.md` para el diseño completo (100+ notebooks proyectados).
-
-## 🚀 Próximos Pasos
-- [ ] Notebooks de Real-time & IoT
-- [ ] Notebooks de AI Generativa  
-- [ ] Notebooks de Data Governance
-- [ ] Capstones end-to-end
+**Nota:** La carpeta `bases/` está ignorada por Git y no forma parte del repositorio.
 
 ## 📚 Recursos
-- **Especificación completa:** `bases/contenido.md`
 - **Catálogo de notebooks:** `config/notebooks_index.yml`
 - **Diccionario de datos:** `docs/data_dictionary.md`
-
-## 🤝 Contribuir
-Ver `CONTRIBUTING.md` para guías de estilo y proceso de contribución.
+- **Análisis de notebooks:** `ANALISIS_NOTEBOOKS.md`
 
 ## 📝 Licencia
 Este proyecto es de uso educativo y demostrativo.

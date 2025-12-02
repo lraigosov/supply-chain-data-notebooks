@@ -1,8 +1,66 @@
 # Data Dictionary
 
-- products.csv: sku, category, brand
-- locations.csv: location_id, type, region
-- calendar.csv: date, is_holiday
-- orders.csv: order_id, date, sku, qty, location_id, channel
-- inventory.csv: location_id, sku, on_hand
-- transport_events.csv: event_id, order_id, status, lat, lon
+Diccionario de datos para los archivos CSV generados sintéticamente en `data/raw/`.
+
+## products.csv
+| Campo | Tipo | Descripción |
+|-------|------|-------------|
+| `sku` | string | Código único del producto (formato: SKU-XXXXX) |
+| `category` | string | Categoría: Beverages, Snacks, PersonalCare, Household, Electronics |
+| `brand` | string | Marca: BrandA, BrandB, BrandC, BrandD, BrandE |
+| `unit_cost` | float | Costo unitario del producto (USD, rango: 5-150) |
+
+**Total registros:** 200 SKUs
+
+## locations.csv
+| Campo | Tipo | Descripción |
+|-------|------|-------------|
+| `location_id` | string | Código único de ubicación (formato: LOC-XXX) |
+| `type` | string | Tipo: Plant, DC (Distribution Center), Hub, Store |
+| `region` | string | Región: NORTH, SOUTH, EAST, WEST, CENTER |
+| `capacity` | integer | Capacidad de almacenamiento (unidades) |
+
+**Total registros:** 30 ubicaciones
+
+## calendar.csv
+| Campo | Tipo | Descripción |
+|-------|------|-------------|
+| `date` | date | Fecha (formato: YYYY-MM-DD) |
+| `is_holiday` | integer | 1 si es festivo, 0 si no (7% festivos) |
+| `is_promo` | integer | 1 si hay promoción, 0 si no (15% días promocionales) |
+| `day_of_week` | integer | Día de la semana (0=Lunes, 6=Domingo) |
+
+**Rango:** 2024-01-01 a 2024-03-31 (90 días)
+
+## orders.csv
+| Campo | Tipo | Descripción |
+|-------|------|-------------|
+| `order_id` | string | Identificador único de orden (formato: ORD-XXXXXX) |
+| `date` | date | Fecha de la orden (formato: YYYY-MM-DD) |
+| `sku` | string | SKU del producto ordenado |
+| `qty` | integer | Cantidad ordenada (distribución gamma) |
+| `location_id` | string | Ubicación de destino |
+| `channel` | string | Canal de venta: Retail (50%), Ecom (30%), B2B (20%) |
+
+**Total registros:** ~8,500 órdenes (con estacionalidad en fines de semana y promociones)
+
+## inventory.csv
+| Campo | Tipo | Descripción |
+|-------|------|-------------|
+| `location_id` | string | Ubicación del inventario |
+| `sku` | string | SKU del producto |
+| `on_hand` | integer | Cantidad disponible en inventario (distribución gamma) |
+
+**Total registros:** ~3,000 registros (50% de SKUs por ubicación)
+
+## transport_events.csv
+| Campo | Tipo | Descripción |
+|-------|------|-------------|
+| `event_id` | string | Identificador único del evento (formato: TEV-XXXXXX) |
+| `order_id` | string | Orden asociada al evento |
+| `status` | string | Estado: CREATED, DISPATCHED, IN_TRANSIT, DELIVERED, DELAYED |
+| `lat` | float | Latitud del evento (rango: -33.6 a -33.2) |
+| `lon` | float | Longitud del evento (rango: -70.8 a -70.5) |
+| `timestamp` | datetime | Fecha y hora del evento |
+
+**Total registros:** ~3,000 eventos de tracking (muestra de 1,000 órdenes con 2-5 eventos cada una)
