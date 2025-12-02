@@ -1,6 +1,6 @@
 notebooks:
   - id: "DE-01"
-    title: "Batch ingestion from WMS CSV to Data Warehouse"
+    title: "Ingesta batch desde WMS a DWH"
     specialty: "Data Engineering"
     process: "Deliver"
     level: "Intermediate"
@@ -8,7 +8,7 @@ notebooks:
     path: notebooks/10_data_engineering/DE-01-ingesta.ipynb
     dataset_deps: [products.csv, orders.csv, inventory.csv]
   - id: "DE-02"
-    title: "Pipeline incremental de órdenes desde ERP"
+    title: "Pipeline incremental de órdenes"
     specialty: "Data Engineering"
     process: "Source"
     level: "Intermediate"
@@ -16,7 +16,7 @@ notebooks:
     path: notebooks/10_data_engineering/DE-02-pipeline_incremental.ipynb
     dataset_deps: [orders.csv]
   - id: "DA-01"
-     title: "Diseño de modelo dimensional para analítica de inventarios"
+      title: "Modelo dimensional para inventarios"
     specialty: "Data Architecture"
      process: "Plan"
      level: "Intermediate"
@@ -41,7 +41,7 @@ notebooks:
     path: notebooks/30_data_science_ml/DS-02-estacionalidad.ipynb
     dataset_deps: [orders.csv]
   - id: "BA-01"
-     title: "Dashboard de OTIF (On-Time In-Full) por cliente y región"
+      title: "Dashboard OTIF (On-Time In-Full)"
     specialty: "Business Analytics"
     process: "Deliver"
      level: "Intermediate"
@@ -50,7 +50,7 @@ notebooks:
      dataset_deps: [orders.csv, transport_events.csv, locations.csv]
      estimated_time_min: 50
   - id: "OR-01"
-     title: "Cálculo de stock de seguridad con fórmulas clásicas"
+      title: "Cálculo de stock de seguridad"
     specialty: "Optimization & OR"
      process: "Plan"
      level: "Intermediate"
@@ -76,7 +76,7 @@ notebooks:
     path: notebooks/60_realtime_iot/RT-01-stream_tracking.ipynb
     dataset_deps: [transport_events.csv]
   - id: "GEN-01"
-    title: "RAG para KPIs logísticos (mock)"
+    title: "RAG para consultas de KPIs"
     specialty: "AI Generativa"
     process: "Enable"
     level: "Intro"
@@ -92,7 +92,7 @@ notebooks:
     path: notebooks/80_governance_quality/DG-01-perfilado_calidad.ipynb
     dataset_deps: [products.csv]
   - id: "CAP-01"
-    title: "Torre de control (demo simple)"
+    title: "Torre de control"
     specialty: "Capstone"
     process: "Deliver"
     level: "Intro"

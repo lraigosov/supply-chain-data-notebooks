@@ -10,7 +10,7 @@ Diccionario de datos para los archivos CSV generados sintéticamente en `data/ra
 | `brand` | string | Marca: BrandA, BrandB, BrandC, BrandD, BrandE |
 | `unit_cost` | float | Costo unitario del producto (USD, rango: 5-150) |
 
-**Total registros:** 200 SKUs
+**Registros generados:** conforme a scripts en `data/synthetic_generators/`
 
 ## locations.csv
 | Campo | Tipo | Descripción |
@@ -20,7 +20,7 @@ Diccionario de datos para los archivos CSV generados sintéticamente en `data/ra
 | `region` | string | Región: NORTH, SOUTH, EAST, WEST, CENTER |
 | `capacity` | integer | Capacidad de almacenamiento (unidades) |
 
-**Total registros:** 30 ubicaciones
+**Registros generados:** conforme a scripts en `data/synthetic_generators/`
 
 ## calendar.csv
 | Campo | Tipo | Descripción |
@@ -30,7 +30,7 @@ Diccionario de datos para los archivos CSV generados sintéticamente en `data/ra
 | `is_promo` | integer | 1 si hay promoción, 0 si no (15% días promocionales) |
 | `day_of_week` | integer | Día de la semana (0=Lunes, 6=Domingo) |
 
-**Rango:** 2024-01-01 a 2024-03-31 (90 días)
+**Rango típico:** definido por el generador en `generate_data.py`
 
 ## orders.csv
 | Campo | Tipo | Descripción |
@@ -42,7 +42,7 @@ Diccionario de datos para los archivos CSV generados sintéticamente en `data/ra
 | `location_id` | string | Ubicación de destino |
 | `channel` | string | Canal de venta: Retail (50%), Ecom (30%), B2B (20%) |
 
-**Total registros:** ~8,500 órdenes (con estacionalidad en fines de semana y promociones)
+**Volumen:** definido por parámetros del generador; incluye estacionalidad y promociones
 
 ## inventory.csv
 | Campo | Tipo | Descripción |
@@ -51,7 +51,7 @@ Diccionario de datos para los archivos CSV generados sintéticamente en `data/ra
 | `sku` | string | SKU del producto |
 | `on_hand` | integer | Cantidad disponible en inventario (distribución gamma) |
 
-**Total registros:** ~3,000 registros (50% de SKUs por ubicación)
+**Volumen:** acorde al generador; proporciones pueden variar
 
 ## transport_events.csv
 | Campo | Tipo | Descripción |
@@ -63,4 +63,4 @@ Diccionario de datos para los archivos CSV generados sintéticamente en `data/ra
 | `lon` | float | Longitud del evento (rango: -70.8 a -70.5) |
 | `timestamp` | datetime | Fecha y hora del evento |
 
-**Total registros:** ~3,000 eventos de tracking (muestra de 1,000 órdenes con 2-5 eventos cada una)
+**Volumen:** acorde al generador; número de eventos por orden puede variar

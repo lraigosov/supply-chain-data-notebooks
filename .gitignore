@@ -9,6 +9,7 @@ __pycache__/
 .Python
 env/
 venv/
+.venv/
 ENV/
 build/
 develop-eggs/
@@ -29,6 +30,7 @@ wheels/
 # Jupyter Notebook
 .ipynb_checkpoints
 */.ipynb_checkpoints/*
+*.out.ipynb
 
 # IDEs
 .vscode/
@@ -50,10 +52,30 @@ Thumbs.db
 !config/*.json
 !config/*.yml
 !config/*.yaml
+data/processed/
+data/**/tmp/
+data/**/temp/
 
 # Logs
 *.log
+logs/
 
 # Environment variables
 .env
 .env.local
+
+# Testing / tooling caches
+.pytest_cache/
+.coverage
+.mypy_cache/
+.ruff_cache/
+
+# Byte-compiled
+*.pyo
+*.pyd
+
+# Prefect / orchestration
+.prefect/
+
+# Redis / local services data (if any)
+redis-data/

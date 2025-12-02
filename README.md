@@ -1,43 +1,14 @@
 # Supply Chain Data Notebooks
 
-**100+ Practical Notebooks for Data-Driven Supply Chain & Operations**
+Repositorio de notebooks ejecutables para analítica de cadena de suministro y operaciones. Contiene datos sintéticos, cuadernos por especialidad y utilidades mínimas.
 
-Repositorio de notebooks ejecutables que demuestran aplicaciones prácticas de análisis de datos, machine learning, optimización y arquitectura de datos en problemas reales de logística y operaciones.
-
-## 📊 Estado Actual
-- ✅ **16 notebooks implementados** con casos de negocio realistas
-- ✅ **Datos sintéticos** generados (200 SKUs, 30 ubicaciones, 8500+ órdenes)
-- ✅ **9 especialidades cubiertas:** Data Engineering, Data Architecture, Data Science, Business Analytics, Optimization & OR, Real-time & IoT, AI Generativa, Data Governance, Capstone
-
-### Notebooks Implementados
-
-| ID | Título | Especialidad | Nivel | Tiempo |
-|----|--------|--------------|-------|--------|
-| **DE-01** | Ingesta batch desde WMS a DWH | Data Engineering | Intermedio | 45 min |
-| **DE-02** | Pipeline incremental de órdenes | Data Engineering | Intermedio | - |
-| **DA-01** | Modelo dimensional para inventarios | Data Architecture | Intermedio | 60 min |
-| **DS-01** | EDA de órdenes e inventarios | Data Science | Intro | 40 min |
-| **DS-02** | Detección de estacionalidad en demanda | Data Science | Intermedio | - |
-| **BA-01** | Dashboard OTIF (On-Time In-Full) | Business Analytics | Intermedio | 50 min |
-| **OR-01** | Cálculo de stock de seguridad | Optimization & OR | Intermedio | 55 min |
-| **OR-02** | Políticas de inventario | Optimization & OR | Intermedio | - |
-| **OR-02** | VRP con restricción de capacidad | Optimization & OR | Avanzado | 65 min |
-| **RT-01** | Simulación de stream de tracking | Real-time & IoT | Intro | - |
-| **GEN-01** | RAG para consultas de KPIs | AI Generativa | Avanzado | 60 min |
-| **DG-01** | Perfilado de calidad de datos maestro | Data Governance | Intermedio | - |
-| **CAP-01** | Torre de control (dashboard integrado) | Capstone | Intermedio | - |
-| **AP-01** | Apply en DataFrames (tutorial pandas) | Utilidades | Intro | - |
-| **SI-09** | Flujo ML end-to-end | Utilidades | Intermedio | - |
-
-Cada notebook incluye:
-- 📋 **Contexto de negocio real** (retail, farmacéutica, logística)
-- 🎯 **Explicación Qué/Por qué/Para qué/Cuándo/Cómo**
-- 📊 **Código ejecutable** con datos sintéticos realistas
-- 📈 **Visualizaciones** y análisis detallados
-- 💡 **Insights accionables** y recomendaciones
+## Estado actual
+- Notebooks organizados en subcarpetas por temática (Engineering, Architecture, Data Science, BI, OR, IoT, GenAI, Governance, Capstone, Utilidades).
+- Datos sintéticos disponibles en `data/raw/` y salidas en `data/processed/`.
+- Ejecución de notebooks verificada con `papermill` en entorno virtual.
 
 ## Requisitos
-- Python 3.11+
+- Python 3.10 (entorno virtual en `.venv`)
 - PowerShell (Windows)
 
 ## Setup
@@ -46,52 +17,65 @@ Cada notebook incluye:
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 
-# Instalar dependencias
+# Instalar dependencias base
 pip install -U pip
-pip install pandas numpy matplotlib seaborn plotly scipy pyyaml pyarrow pulp
+pip install pandas numpy matplotlib seaborn plotly scipy pyyaml pyarrow pulp papermill
 ```
 
 ## Generar datos sintéticos
 ```powershell
-python data/synthetic_generators/generate_data.py
+pwsh data/synthetic_generators/generate_all.ps1
 ```
 
-## Ejecutar un notebook
+## Ejecutar notebooks (papermill)
 ```powershell
-# Con papermill
-papermill notebooks/20_data_architecture/DA-01-modelo_dimensional.ipynb output.ipynb
-
-# O abrir directamente en Jupyter/VS Code
-jupyter notebook
+# Usando papermill del venv
+F:\GitHub\supply-chain-data-notebooks\.venv\Scripts\papermill.exe \
+	"notebooks/30_data_science_ml/DS-01-eda.ipynb" \
+	"notebooks/30_data_science_ml/DS-01-eda.out.ipynb"
 ```
 
-## 📁 Estructura del Proyecto
+## Estructura del proyecto
 ```
 .
+├── config/
+│   └── notebooks_index.yml
 ├── data/
-│   ├── raw/               # Datos sintéticos (CSV)
-│   ├── processed/         # Datos transformados
-│   └── synthetic_generators/  # Scripts para generar datos
+│   ├── raw/
+│   ├── processed/
+│   └── synthetic_generators/
+├── docs/
+│   ├── data_dictionary.md
+│   └── use_case_catalog.md
 ├── notebooks/
 │   ├── 10_data_engineering/
 │   ├── 20_data_architecture/
 │   ├── 30_data_science_ml/
 │   ├── 40_business_analytics_bi/
 │   ├── 50_optimization_or/
-│   └── ...
+│   ├── 60_realtime_iot/
+│   ├── 70_ai_gen_agents/
+│   ├── 80_governance_quality/
+│   ├── 90_capstone_end2end/
+│   └── 99_utilidades/
 ├── src/
-│   └── utils/             # Módulos reutilizables
-├── config/
-│   └── notebooks_index.yml  # Catálogo de notebooks
-└── docs/                  # Documentación adicional
+│   └── utils/
+├── tests/
+│   ├── data_tests/
+│   └── unit_tests/
+├── requirements.txt
+├── pyproject.toml
+└── README.md
 ```
 
-**Nota:** La carpeta `bases/` está ignorada por Git y no forma parte del repositorio.
+## Recursos
+- Catálogo de notebooks: `config/notebooks_index.yml`
+- Diccionario de datos: `docs/data_dictionary.md`
+- Catálogo de casos: `docs/use_case_catalog.md`
 
-## 📚 Recursos
-- **Catálogo de notebooks:** `config/notebooks_index.yml`
-- **Diccionario de datos:** `docs/data_dictionary.md`
-- **Análisis de notebooks:** `ANALISIS_NOTEBOOKS.md`
+## Notas
+- `bases/` existe en el repositorio; no está ignorada por Git.
+- No se incluyen ni documentan contenidos fuera del árbol del repositorio.
 
-## 📝 Licencia
-Este proyecto es de uso educativo y demostrativo.
+## Licencia
+Uso educativo y demostrativo.
