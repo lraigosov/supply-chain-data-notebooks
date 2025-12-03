@@ -66,7 +66,7 @@ Diccionario de datos para los archivos CSV generados sintéticamente en `data/ra
 **Volumen:** acorde al generador; número de eventos por orden puede variar
 
 ## gtfs_local.zip / gtfs_sample.zip
-Archivos estándar GTFS (General Transit Feed Specification) ubicados en `config/` para pruebas de transporte masivo en `TR-01`.
+Archivos estándar GTFS (General Transit Feed Specification) ubicados en `data/raw/` para pruebas de transporte masivo en `TR-01`.
 
 | Archivo | Descripción |
 |---------|-------------|

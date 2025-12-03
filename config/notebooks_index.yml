@@ -40,6 +40,30 @@ notebooks:
     tags: [seasonality, forecast, statsmodels]
     path: notebooks/30_data_science_ml/DS-02-estacionalidad.ipynb
     dataset_deps: [orders.csv]
+  - id: "DS-03"
+    title: "Service level vs cost trade-off"
+    specialty: "Data Science"
+    process: "Plan"
+    level: "Intermediate"
+    tags: [service-level, cost, optimization]
+    path: notebooks/30_data_science_ml/DS-03-service_level_cost_tradeoff.ipynb
+    dataset_deps: [orders.csv, inventory.csv]
+  - id: "DS-04"
+    title: "Last mile analytics"
+    specialty: "Data Science"
+    process: "Deliver"
+    level: "Intermediate"
+    tags: [last-mile, delivery, kpi]
+    path: notebooks/30_data_science_ml/DS-04-last_mile_analytics.ipynb
+    dataset_deps: [transport_events.csv]
+  - id: "DS-05"
+    title: "Supply risk scenarios"
+    specialty: "Data Science"
+    process: "Plan"
+    level: "Intermediate"
+    tags: [risk, supply, scenarios]
+    path: notebooks/30_data_science_ml/DS-05-supply_risk_scenarios.ipynb
+    dataset_deps: []
   - id: "BA-01"
     title: "Dashboard OTIF (On-Time In-Full)"
     specialty: "Business Analytics"
@@ -49,6 +73,14 @@ notebooks:
     path: notebooks/40_business_analytics_bi/BA-01-dashboard_otif.ipynb
     dataset_deps: [orders.csv, transport_events.csv, locations.csv]
     estimated_time_min: 50
+  - id: "BA-02-CTS"
+    title: "Cost-to-Serve"
+    specialty: "Business Analytics"
+    process: "Plan"
+    level: "Intermediate"
+    tags: [cost-to-serve, profitability]
+    path: notebooks/40_business_analytics_bi/BA-02-cost_to_serve.ipynb
+    dataset_deps: [orders.csv, transport_events.csv]
   - id: "BA-02"
     title: "Planeación S&OP con escenarios de demanda"
     specialty: "Business Analytics"
@@ -58,6 +90,22 @@ notebooks:
     path: notebooks/40_business_analytics_bi/BA-02-sop_scenarios.ipynb
     dataset_deps: []
     estimated_time_min: 45
+  - id: "BA-03"
+    title: "Productividad de almacén"
+    specialty: "Business Analytics"
+    process: "Deliver"
+    level: "Intermediate"
+    tags: [warehouse, productivity, kpi]
+    path: notebooks/40_business_analytics_bi/BA-03-warehouse_productivity.ipynb
+    dataset_deps: [inventory.csv, orders.csv]
+  - id: "BA-04"
+    title: "Desempeño de proveedores"
+    specialty: "Business Analytics"
+    process: "Deliver"
+    level: "Intermediate"
+    tags: [supplier, kpi, reliability]
+    path: notebooks/40_business_analytics_bi/BA-04-supplier_performance.ipynb
+    dataset_deps: [orders.csv]
   - id: "OR-01"
     title: "Cálculo de stock de seguridad"
     specialty: "Optimization & OR"
@@ -67,15 +115,6 @@ notebooks:
     path: notebooks/50_optimization_or/OR-01-stock_seguridad.ipynb
     dataset_deps: [orders.csv, products.csv]
     estimated_time_min: 55
-  - id: "OR-02"
-    title: "Problema de ruteo de vehículos (VRP) con restricción de capacidad"
-    specialty: "Optimization & OR"
-    process: "Deliver"
-    level: "Advanced"
-    tags: [vrp, routing, optimization, pulp, capacity, last-mile]
-    path: notebooks/50_optimization_or/OR-02-vrp_capacidad.ipynb
-    dataset_deps: []
-    estimated_time_min: 65
   - id: "OR-02-EOQ"
     title: "Políticas de inventario (EOQ)"
     specialty: "Optimization & OR"
@@ -85,6 +124,15 @@ notebooks:
     path: notebooks/50_optimization_or/OR-02-politicas_inventario.ipynb
     dataset_deps: []
     estimated_time_min: 50
+  - id: "OR-02-VRP"
+    title: "VRP con restricción de capacidad"
+    specialty: "Optimization & OR"
+    process: "Deliver"
+    level: "Advanced"
+    tags: [vrp, routing, optimization, pulp, capacity, last-mile]
+    path: notebooks/50_optimization_or/OR-02-vrp_capacidad.ipynb
+    dataset_deps: []
+    estimated_time_min: 65
   - id: "OR-03"
     title: "Planeación de capacidad en CD y flota"
     specialty: "Optimization & OR"
@@ -94,6 +142,30 @@ notebooks:
     path: notebooks/50_optimization_or/OR-03-capacity_planning_dc_fleet.ipynb
     dataset_deps: []
     estimated_time_min: 60
+  - id: "OR-04"
+    title: "Inventario multi‑echelon"
+    specialty: "Optimization & OR"
+    process: "Plan"
+    level: "Advanced"
+    tags: [multi-echelon, inventory]
+    path: notebooks/50_optimization_or/OR-04-multi_echelon_inventory.ipynb
+    dataset_deps: []
+  - id: "OR-05"
+    title: "Warehouse slotting"
+    specialty: "Optimization & OR"
+    process: "Deliver"
+    level: "Intermediate"
+    tags: [slotting, warehouse, layout]
+    path: notebooks/50_optimization_or/OR-05-warehouse_slotting.ipynb
+    dataset_deps: []
+  - id: "OR-06"
+    title: "Simulación de colas en andenes"
+    specialty: "Optimization & OR"
+    process: "Deliver"
+    level: "Intermediate"
+    tags: [queueing, simulation, mmc]
+    path: notebooks/50_optimization_or/OR-06-dock_queue_simulation.ipynb
+    dataset_deps: []
   - id: "RT-01"
     title: "Simulación de stream de tracking"
     specialty: "Realtime & IoT"
@@ -102,6 +174,22 @@ notebooks:
     tags: [stream, tracking]
     path: notebooks/60_realtime_iot/RT-01-stream_tracking.ipynb
     dataset_deps: [transport_events.csv]
+  - id: "RT-02"
+    title: "Mantenimiento predictivo de flota"
+    specialty: "Realtime & IoT"
+    process: "Deliver"
+    level: "Intermediate"
+    tags: [predictive, maintenance, classification]
+    path: notebooks/60_realtime_iot/RT-02-fleet_predictive_maintenance.ipynb
+    dataset_deps: []
+  - id: "RT-03"
+    title: "Monitoreo de cadena de frío"
+    specialty: "Realtime & IoT"
+    process: "Deliver"
+    level: "Intermediate"
+    tags: [cold-chain, temperature, alerts]
+    path: notebooks/60_realtime_iot/RT-03-cold_chain_monitoring.ipynb
+    dataset_deps: []
   - id: "TR-01"
     title: "Análisis de transporte masivo con GTFS"
     specialty: "Realtime & IoT"
@@ -118,24 +206,6 @@ notebooks:
     tags: [rag, kpi]
     path: notebooks/70_ai_gen_agents/GEN-01-rag_kpi.ipynb
     dataset_deps: []
-    - id: "AP-01"
-      title: "Apply en DataFrames - Tutorial pandas"
-      specialty: "Utilities"
-      process: "Enable"
-      level: "Intro"
-      tags: [pandas, tutorial, performance, dataframe]
-      path: notebooks/99_utilidades/AP-01-aplicar_todo_dataframe.ipynb
-      dataset_deps: []
-      estimated_time_min: 30
-    - id: "SI-09"
-      title: "Flujo ML end-to-end con scikit-learn"
-      specialty: "Utilities"
-      process: "Enable"
-      level: "Intermediate"
-      tags: [ml, pipeline, logistic-regression, validation, scikit-learn]
-      path: notebooks/99_utilidades/SI-09-flujo_si9.ipynb
-      dataset_deps: []
-      estimated_time_min: 50
   - id: "DG-01"
     title: "Perfilado de calidad de datos maestro"
     specialty: "Data Governance"

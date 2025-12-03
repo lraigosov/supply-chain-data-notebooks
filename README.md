@@ -8,7 +8,7 @@ Repositorio de notebooks ejecutables para analítica de cadena de suministro y o
 - Ejecución de notebooks verificada con `papermill` en entorno virtual.
 
 ## Requisitos
-- Python 3.10 (entorno virtual en `.venv`)
+- Python 3.10+
 - PowerShell (Windows)
 
 ## Setup
@@ -17,9 +17,9 @@ Repositorio de notebooks ejecutables para analítica de cadena de suministro y o
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 
-# Instalar dependencias base
+# Instalar dependencias del proyecto (opcional editable)
 pip install -U pip
-pip install pandas numpy matplotlib seaborn plotly scipy pyyaml pyarrow pulp papermill
+pip install -e .[core,notebooks,or,iot,web,flow]
 ```
 
 ## Generar datos sintéticos
@@ -29,10 +29,7 @@ pwsh data/synthetic_generators/generate_all.ps1
 
 ## Ejecutar notebooks (papermill)
 ```powershell
-# Usando papermill del venv
-F:\GitHub\supply-chain-data-notebooks\.venv\Scripts\papermill.exe \
-	"notebooks/30_data_science_ml/DS-01-eda.ipynb" \
-	"notebooks/30_data_science_ml/DS-01-eda.out.ipynb"
+papermill notebooks/30_data_science_ml/DS-01-eda.ipynb notebooks/30_data_science_ml/DS-01-eda.out.ipynb
 ```
 
 ## Estructura del proyecto
@@ -48,6 +45,7 @@ F:\GitHub\supply-chain-data-notebooks\.venv\Scripts\papermill.exe \
 │   ├── data_dictionary.md
 │   └── use_case_catalog.md
 ├── notebooks/
+│   ├── 00_common/
 │   ├── 10_data_engineering/
 │   ├── 20_data_architecture/
 │   ├── 30_data_science_ml/
@@ -58,6 +56,7 @@ F:\GitHub\supply-chain-data-notebooks\.venv\Scripts\papermill.exe \
 │   ├── 80_governance_quality/
 │   ├── 90_capstone_end2end/
 │   └── 99_utilidades/
+├── scripts/
 ├── src/
 │   └── utils/
 ├── tests/
@@ -80,19 +79,30 @@ F:\GitHub\supply-chain-data-notebooks\.venv\Scripts\papermill.exe \
 ### 30_data_science_ml/
 - `DS-01`: [EDA de órdenes e inventarios](notebooks/30_data_science_ml/DS-01-eda.ipynb)
 - `DS-02`: [Detección de estacionalidad en demanda](notebooks/30_data_science_ml/DS-02-estacionalidad.ipynb)
+- `DS-03`: [Service level vs cost trade-off](notebooks/30_data_science_ml/DS-03-service_level_cost_tradeoff.ipynb)
+- `DS-04`: [Last mile analytics](notebooks/30_data_science_ml/DS-04-last_mile_analytics.ipynb)
+- `DS-05`: [Supply risk scenarios](notebooks/30_data_science_ml/DS-05-supply_risk_scenarios.ipynb)
 
 ### 40_business_analytics_bi/
 - `BA-01`: [Dashboard OTIF (On-Time In-Full)](notebooks/40_business_analytics_bi/BA-01-dashboard_otif.ipynb)
+- `BA-02`: [Cost-to-Serve](notebooks/40_business_analytics_bi/BA-02-cost_to_serve.ipynb)
 - `BA-02`: [Planeación S&OP con escenarios de demanda](notebooks/40_business_analytics_bi/BA-02-sop_scenarios.ipynb)
+- `BA-03`: [Productividad de almacén](notebooks/40_business_analytics_bi/BA-03-warehouse_productivity.ipynb)
+- `BA-04`: [Desempeño de proveedores](notebooks/40_business_analytics_bi/BA-04-supplier_performance.ipynb)
 
 ### 50_optimization_or/
 - `OR-01`: [Cálculo de stock de seguridad](notebooks/50_optimization_or/OR-01-stock_seguridad.ipynb)
 - `OR-02`: [Políticas de inventario (EOQ)](notebooks/50_optimization_or/OR-02-politicas_inventario.ipynb)
 - `OR-02`: [VRP con restricción de capacidad](notebooks/50_optimization_or/OR-02-vrp_capacidad.ipynb)
 - `OR-03`: [Planeación de capacidad en CD y flota](notebooks/50_optimization_or/OR-03-capacity_planning_dc_fleet.ipynb)
+- `OR-04`: [Inventario multi‑echelon](notebooks/50_optimization_or/OR-04-multi_echelon_inventory.ipynb)
+- `OR-05`: [Warehouse slotting](notebooks/50_optimization_or/OR-05-warehouse_slotting.ipynb)
+- `OR-06`: [Simulación de colas en andenes](notebooks/50_optimization_or/OR-06-dock_queue_simulation.ipynb)
 
 ### 60_realtime_iot/
 - `RT-01`: [Simulación de stream de tracking GPS](notebooks/60_realtime_iot/RT-01-stream_tracking.ipynb)
+- `RT-02`: [Mantenimiento predictivo de flota](notebooks/60_realtime_iot/RT-02-fleet_predictive_maintenance.ipynb)
+- `RT-03`: [Monitoreo de cadena de frío](notebooks/60_realtime_iot/RT-03-cold_chain_monitoring.ipynb)
 - `TR-01`: [Análisis de transporte masivo con GTFS](notebooks/60_realtime_iot/TR-01-transporte_masivo.ipynb)
 
 ### 70_ai_gen_agents/
@@ -114,12 +124,8 @@ F:\GitHub\supply-chain-data-notebooks\.venv\Scripts\papermill.exe \
 - Catálogo de casos: `docs/use_case_catalog.md`
 
 ## Notas
-- `bases/` existe en el repositorio; no está ignorada por Git.
 - No se incluyen ni documentan contenidos fuera del árbol del repositorio.
 
 ## Créditos y Licencia
 - Autor y mantenimiento: **lraigosov**.
-- Contenidos (notebooks y documentación): **CC BY 4.0** — requiere atribución al autor. Ver `LICENSE`.
-- Código auxiliar (cuando aplique): licencia permisiva indicada en metadatos del proyecto.
-- Desarrollo asistido por **GitHub Copilot Free** (code completions, refactoring, documentation).
-- Análisis automatizado con **GitHub Copilot Actions** (code review, security scanning).
+- Licencia: Ver archivo `LICENSE` del repositorio.
