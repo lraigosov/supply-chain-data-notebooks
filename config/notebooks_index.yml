@@ -76,6 +76,24 @@ notebooks:
     path: notebooks/50_optimization_or/OR-02-vrp_capacidad.ipynb
     dataset_deps: []
     estimated_time_min: 65
+  - id: "OR-02-EOQ"
+    title: "Políticas de inventario (EOQ)"
+    specialty: "Optimization & OR"
+    process: "Plan"
+    level: "Intermediate"
+    tags: [inventory, eoq, optimization]
+    path: notebooks/50_optimization_or/OR-02-politicas_inventario.ipynb
+    dataset_deps: []
+    estimated_time_min: 50
+  - id: "OR-03"
+    title: "Planeación de capacidad en CD y flota"
+    specialty: "Optimization & OR"
+    process: "Source-Make-Deliver"
+    level: "Advanced"
+    tags: [capacity, warehouse, fleet, linear-programming, pulp]
+    path: notebooks/50_optimization_or/OR-03-capacity_planning_dc_fleet.ipynb
+    dataset_deps: []
+    estimated_time_min: 60
   - id: "RT-01"
     title: "Simulación de stream de tracking"
     specialty: "Realtime & IoT"
@@ -84,6 +102,14 @@ notebooks:
     tags: [stream, tracking]
     path: notebooks/60_realtime_iot/RT-01-stream_tracking.ipynb
     dataset_deps: [transport_events.csv]
+  - id: "TR-01"
+    title: "Análisis de transporte masivo con GTFS"
+    specialty: "Realtime & IoT"
+    process: "Plan"
+    level: "Intermediate"
+    tags: [gtfs, transit, geospatial]
+    path: notebooks/60_realtime_iot/TR-01-transporte_masivo.ipynb
+    dataset_deps: [gtfs_local.zip, gtfs_sample.zip]
   - id: "GEN-01"
     title: "RAG para consultas de KPIs"
     specialty: "AI Generativa"
@@ -92,6 +118,24 @@ notebooks:
     tags: [rag, kpi]
     path: notebooks/70_ai_gen_agents/GEN-01-rag_kpi.ipynb
     dataset_deps: []
+    - id: "AP-01"
+      title: "Apply en DataFrames - Tutorial pandas"
+      specialty: "Utilities"
+      process: "Enable"
+      level: "Intro"
+      tags: [pandas, tutorial, performance, dataframe]
+      path: notebooks/99_utilidades/AP-01-aplicar_todo_dataframe.ipynb
+      dataset_deps: []
+      estimated_time_min: 30
+    - id: "SI-09"
+      title: "Flujo ML end-to-end con scikit-learn"
+      specialty: "Utilities"
+      process: "Enable"
+      level: "Intermediate"
+      tags: [ml, pipeline, logistic-regression, validation, scikit-learn]
+      path: notebooks/99_utilidades/SI-09-flujo_si9.ipynb
+      dataset_deps: []
+      estimated_time_min: 50
   - id: "DG-01"
     title: "Perfilado de calidad de datos maestro"
     specialty: "Data Governance"
