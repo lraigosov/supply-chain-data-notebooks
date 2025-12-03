@@ -16,14 +16,14 @@ notebooks:
     path: notebooks/10_data_engineering/DE-02-pipeline_incremental.ipynb
     dataset_deps: [orders.csv]
   - id: "DA-01"
-      title: "Modelo dimensional para inventarios"
+    title: "Modelo dimensional para inventarios"
     specialty: "Data Architecture"
-     process: "Plan"
-     level: "Intermediate"
-     tags: [dimensional-modeling, star-schema, inventory, data-warehouse, analytics]
+    process: "Plan"
+    level: "Intermediate"
+    tags: [dimensional-modeling, star-schema, inventory, data-warehouse, analytics]
     path: notebooks/20_data_architecture/DA-01-modelo_dimensional.ipynb
-     dataset_deps: [inventory.csv, products.csv, locations.csv]
-     estimated_time_min: 60
+    dataset_deps: [inventory.csv, products.csv, locations.csv]
+    estimated_time_min: 60
   - id: "DS-01"
     title: "EDA de órdenes e inventarios"
     specialty: "Data Science"
@@ -41,32 +41,32 @@ notebooks:
     path: notebooks/30_data_science_ml/DS-02-estacionalidad.ipynb
     dataset_deps: [orders.csv]
   - id: "BA-01"
-      title: "Dashboard OTIF (On-Time In-Full)"
+    title: "Dashboard OTIF (On-Time In-Full)"
     specialty: "Business Analytics"
     process: "Deliver"
-     level: "Intermediate"
-     tags: [otif, kpi, delivery, dashboard, analytics, service-level]
+    level: "Intermediate"
+    tags: [otif, kpi, delivery, dashboard, analytics, service-level]
     path: notebooks/40_business_analytics_bi/BA-01-dashboard_otif.ipynb
-     dataset_deps: [orders.csv, transport_events.csv, locations.csv]
-     estimated_time_min: 50
+    dataset_deps: [orders.csv, transport_events.csv, locations.csv]
+    estimated_time_min: 50
   - id: "OR-01"
-      title: "Cálculo de stock de seguridad"
+    title: "Cálculo de stock de seguridad"
     specialty: "Optimization & OR"
-     process: "Plan"
-     level: "Intermediate"
-     tags: [safety-stock, inventory, optimization, service-level, statistics]
+    process: "Plan"
+    level: "Intermediate"
+    tags: [safety-stock, inventory, optimization, service-level, statistics]
     path: notebooks/50_optimization_or/OR-01-stock_seguridad.ipynb
-     dataset_deps: [orders.csv, products.csv]
-     estimated_time_min: 55
+    dataset_deps: [orders.csv, products.csv]
+    estimated_time_min: 55
   - id: "OR-02"
-     title: "Problema de ruteo de vehículos (VRP) con restricción de capacidad"
+    title: "Problema de ruteo de vehículos (VRP) con restricción de capacidad"
     specialty: "Optimization & OR"
-     process: "Deliver"
-     level: "Advanced"
-     tags: [vrp, routing, optimization, pulp, capacity, last-mile]
-     path: notebooks/50_optimization_or/OR-02-vrp_capacidad.ipynb
-     dataset_deps: []
-     estimated_time_min: 65
+    process: "Deliver"
+    level: "Advanced"
+    tags: [vrp, routing, optimization, pulp, capacity, last-mile]
+    path: notebooks/50_optimization_or/OR-02-vrp_capacidad.ipynb
+    dataset_deps: []
+    estimated_time_min: 65
   - id: "RT-01"
     title: "Simulación de stream de tracking"
     specialty: "Realtime & IoT"
