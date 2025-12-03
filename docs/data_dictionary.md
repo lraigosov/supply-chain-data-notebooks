@@ -64,3 +64,13 @@ Diccionario de datos para los archivos CSV generados sintéticamente en `data/ra
 | `timestamp` | datetime | Fecha y hora del evento |
 
 **Volumen:** acorde al generador; número de eventos por orden puede variar
+
+## gtfs_local.zip / gtfs_sample.zip
+Archivos estándar GTFS (General Transit Feed Specification) ubicados en `config/` para pruebas de transporte masivo en `TR-01`.
+
+| Archivo | Descripción |
+|---------|-------------|
+| `gtfs_local.zip` | Muestra local de GTFS para pruebas rápidas |
+| `gtfs_sample.zip` | Paquete GTFS de ejemplo con rutas, trips y paradas |
+
+**Uso:** Leídos por el notebook `notebooks/60_realtime_iot/TR-01-transporte_masivo.ipynb` usando librerías como `partridge` o `gtfs_kit`.

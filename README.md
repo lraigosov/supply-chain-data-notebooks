@@ -69,19 +69,44 @@ F:\GitHub\supply-chain-data-notebooks\.venv\Scripts\papermill.exe \
 ```
 
 ## Índice de Notebooks
+
+### 10_data_engineering/
 - `DE-01`: [Ingesta batch desde WMS a DWH](notebooks/10_data_engineering/DE-01-ingesta.ipynb)
 - `DE-02`: [Pipeline incremental de órdenes](notebooks/10_data_engineering/DE-02-pipeline_incremental.ipynb)
+
+### 20_data_architecture/
 - `DA-01`: [Modelo dimensional para inventarios](notebooks/20_data_architecture/DA-01-modelo_dimensional.ipynb)
+
+### 30_data_science_ml/
 - `DS-01`: [EDA de órdenes e inventarios](notebooks/30_data_science_ml/DS-01-eda.ipynb)
 - `DS-02`: [Detección de estacionalidad en demanda](notebooks/30_data_science_ml/DS-02-estacionalidad.ipynb)
+
+### 40_business_analytics_bi/
 - `BA-01`: [Dashboard OTIF (On-Time In-Full)](notebooks/40_business_analytics_bi/BA-01-dashboard_otif.ipynb)
 - `BA-02`: [Planeación S&OP con escenarios de demanda](notebooks/40_business_analytics_bi/BA-02-sop_scenarios.ipynb)
+
+### 50_optimization_or/
 - `OR-01`: [Cálculo de stock de seguridad](notebooks/50_optimization_or/OR-01-stock_seguridad.ipynb)
+- `OR-02`: [Políticas de inventario (EOQ)](notebooks/50_optimization_or/OR-02-politicas_inventario.ipynb)
 - `OR-02`: [VRP con restricción de capacidad](notebooks/50_optimization_or/OR-02-vrp_capacidad.ipynb)
-- `RT-01`: [Simulación de stream de tracking](notebooks/60_realtime_iot/RT-01-stream_tracking.ipynb)
+- `OR-03`: [Planeación de capacidad en CD y flota](notebooks/50_optimization_or/OR-03-capacity_planning_dc_fleet.ipynb)
+
+### 60_realtime_iot/
+- `RT-01`: [Simulación de stream de tracking GPS](notebooks/60_realtime_iot/RT-01-stream_tracking.ipynb)
+- `TR-01`: [Análisis de transporte masivo con GTFS](notebooks/60_realtime_iot/TR-01-transporte_masivo.ipynb)
+
+### 70_ai_gen_agents/
 - `GEN-01`: [RAG para consultas de KPIs](notebooks/70_ai_gen_agents/GEN-01-rag_kpi.ipynb)
+
+### 80_governance_quality/
 - `DG-01`: [Perfilado de calidad de datos maestro](notebooks/80_governance_quality/DG-01-perfilado_calidad.ipynb)
+
+### 90_capstone_end2end/
 - `CAP-01`: [Torre de control](notebooks/90_capstone_end2end/CAP-01-torre_control.ipynb)
+
+### 99_utilidades/
+- `AP-01`: [Apply en DataFrames - Tutorial pandas](notebooks/99_utilidades/AP-01-aplicar_todo_dataframe.ipynb)
+- `SI-09`: [Flujo ML end-to-end con scikit-learn](notebooks/99_utilidades/SI-09-flujo_si9.ipynb)
 
 ## Recursos
 - Catálogo de notebooks: `config/notebooks_index.yml`

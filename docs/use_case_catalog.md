@@ -44,6 +44,12 @@ Catálogo de los notebooks presentes en el repositorio, organizados por especial
 - **Datasets:** orders.csv, transport_events.csv, locations.csv
 - **Tiempo estimado:** 50 min
 
+### BA-02: Planeación S&OP con escenarios de demanda
+- **Nivel:** Intermedio
+- **Tags:** sop, scenarios, capacity, backlog, fill-rate, simulation
+- **Datasets:** Genera datos sintéticos internos (3 familias, 12 semanas)
+- **Tiempo estimado:** 45 min
+
 ## 50_optimization_or/
 
 ### OR-01: Cálculo de stock de seguridad con fórmulas clásicas
@@ -55,7 +61,8 @@ Catálogo de los notebooks presentes en el repositorio, organizados por especial
 ### OR-02: Políticas de inventario (EOQ)
 - **Nivel:** Intermedio
 - **Tags:** inventory, eoq, optimization
-- **Datasets:** orders.csv, products.csv
+- **Datasets:** Genera datos sintéticos internos
+- **Tiempo estimado:** 50 min
 
 ### OR-02: Problema de ruteo de vehículos (VRP) con restricción de capacidad
 - **Nivel:** Avanzado
@@ -63,18 +70,31 @@ Catálogo de los notebooks presentes en el repositorio, organizados por especial
 - **Datasets:** Genera datos sintéticos internos
 - **Tiempo estimado:** 65 min
 
+### OR-03: Planeación de capacidad en CD y flota
+- **Nivel:** Avanzado
+- **Tags:** capacity, warehouse, fleet, linear-programming, pulp
+- **Datasets:** Genera datos sintéticos internos (20 días, capacidad CD/flota)
+- **Tiempo estimado:** 60 min
+
 ## 60_realtime_iot/
 
 ### RT-01: Simulación de stream de tracking GPS
 - **Nivel:** Intro
 - **Tags:** stream, tracking, iot, async, geofencing
-- **Datasets:** Genera datos sintéticos internos
+- **Datasets:** transport_events.csv
+- **Tiempo estimado:** 40 min
+
+### TR-01: Análisis de transporte masivo con GTFS
+- **Nivel:** Intermedio
+- **Tags:** gtfs, transit, geospatial, geopandas, folium
+- **Datasets:** gtfs_local.zip, gtfs_sample.zip (archivos GTFS estándar)
+- **Tiempo estimado:** 55 min
 
 ## 70_ai_gen_agents/
 
 ### GEN-01: RAG (Retrieval Augmented Generation) para consultas de KPIs
 - **Nivel:** Avanzado
-- **Tags:** rag, llm, ai, agents, tfidf, embeddings
+- **Tags:** rag, llm, ai, tfidf, embeddings
 - **Datasets:** Corpus de KPIs internos
 - **Tiempo estimado:** 60 min
 
@@ -96,13 +116,13 @@ Catálogo de los notebooks presentes en el repositorio, organizados por especial
 
 ### AP-01: Apply en DataFrames - Tutorial de pandas
 - **Nivel:** Intro
-- **Tags:** pandas, tutorial, performance
+- **Tags:** pandas, tutorial, performance, dataframe
 - **Datasets:** Genera ejemplos sintéticos
 
 ### SI-09: Flujo ML end-to-end con scikit-learn
 - **Nivel:** Intermedio
 - **Tags:** ml, pipeline, logistic-regression, validation
-- **Datasets:** orders.csv
+- **Datasets:** Genera ejemplos sintéticos
 
 ---
 
