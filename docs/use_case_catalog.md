@@ -36,6 +36,21 @@ Catálogo de los notebooks presentes en el repositorio, organizados por especial
 - **Tags:** seasonality, forecast, statsmodels
 - **Datasets:** orders.csv
 
+### DS-03: Service level vs cost trade-off
+- **Nivel:** Intermedio
+- **Tags:** service-level, cost, optimization
+- **Datasets:** orders.csv, inventory.csv
+
+### DS-04: Analítica de última milla
+- **Nivel:** Intermedio
+- **Tags:** last-mile, delivery, kpi
+- **Datasets:** transport_events.csv
+
+### DS-05: Escenarios de riesgo en suministro
+- **Nivel:** Intermedio
+- **Tags:** risk, supply, scenarios
+- **Datasets:** Genera datos sintéticos internos
+
 ## 40_business_analytics_bi/
 
 ### BA-01: Dashboard de OTIF (On-Time In-Full) por cliente y región
@@ -49,6 +64,21 @@ Catálogo de los notebooks presentes en el repositorio, organizados por especial
 - **Tags:** sop, scenarios, capacity, backlog, fill-rate, simulation
 - **Datasets:** Genera datos sintéticos internos (3 familias, 12 semanas)
 - **Tiempo estimado:** 45 min
+
+### BA-02: Cost-to-Serve
+- **Nivel:** Intermedio
+- **Tags:** cost-to-serve, profitability
+- **Datasets:** orders.csv, transport_events.csv
+
+### BA-03: Productividad de almacén
+- **Nivel:** Intermedio
+- **Tags:** warehouse, productivity, kpi
+- **Datasets:** inventory.csv, orders.csv
+
+### BA-04: Desempeño de proveedores
+- **Nivel:** Intermedio
+- **Tags:** supplier, kpi, reliability
+- **Datasets:** orders.csv
 
 ## 50_optimization_or/
 
@@ -76,6 +106,21 @@ Catálogo de los notebooks presentes en el repositorio, organizados por especial
 - **Datasets:** Genera datos sintéticos internos (20 días, capacidad CD/flota)
 - **Tiempo estimado:** 60 min
 
+### OR-04: Inventario multi‑echelon
+- **Nivel:** Avanzado
+- **Tags:** multi-echelon, inventory
+- **Datasets:** Genera datos sintéticos internos
+
+### OR-05: Warehouse slotting
+- **Nivel:** Intermedio
+- **Tags:** slotting, warehouse, layout
+- **Datasets:** Genera datos sintéticos internos
+
+### OR-06: Simulación de colas en andenes
+- **Nivel:** Intermedio
+- **Tags:** queueing, simulation, mmc
+- **Datasets:** Genera datos sintéticos internos
+
 ## 60_realtime_iot/
 
 ### RT-01: Simulación de stream de tracking GPS
@@ -84,10 +129,20 @@ Catálogo de los notebooks presentes en el repositorio, organizados por especial
 - **Datasets:** transport_events.csv
 - **Tiempo estimado:** 40 min
 
+### RT-02: Mantenimiento predictivo de flota
+- **Nivel:** Intermedio
+- **Tags:** predictive, maintenance, classification
+- **Datasets:** Genera datos sintéticos internos
+
+### RT-03: Monitoreo de cadena de frío
+- **Nivel:** Intermedio
+- **Tags:** cold-chain, temperature, alerts
+- **Datasets:** Genera series de temperatura sintéticas
+
 ### TR-01: Análisis de transporte masivo con GTFS
 - **Nivel:** Intermedio
 - **Tags:** gtfs, transit, geospatial, geopandas, folium
-- **Datasets:** gtfs_local.zip, gtfs_sample.zip (archivos GTFS estándar)
+- **Datasets:** gtfs_local.zip, gtfs_sample.zip (archivos GTFS estándar en `data/raw/`)
 - **Tiempo estimado:** 55 min
 
 ## 70_ai_gen_agents/
