@@ -49,6 +49,15 @@ notebooks:
     path: notebooks/40_business_analytics_bi/BA-01-dashboard_otif.ipynb
     dataset_deps: [orders.csv, transport_events.csv, locations.csv]
     estimated_time_min: 50
+  - id: "BA-02"
+    title: "Planeación S&OP con escenarios de demanda"
+    specialty: "Business Analytics"
+    process: "Plan"
+    level: "Intermediate"
+    tags: [sop, scenarios, capacity, backlog, fill-rate]
+    path: notebooks/40_business_analytics_bi/BA-02-sop_scenarios.ipynb
+    dataset_deps: []
+    estimated_time_min: 45
   - id: "OR-01"
     title: "Cálculo de stock de seguridad"
     specialty: "Optimization & OR"

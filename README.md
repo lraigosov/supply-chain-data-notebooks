@@ -75,6 +75,7 @@ F:\GitHub\supply-chain-data-notebooks\.venv\Scripts\papermill.exe \
 - `DS-01`: [EDA de órdenes e inventarios](notebooks/30_data_science_ml/DS-01-eda.ipynb)
 - `DS-02`: [Detección de estacionalidad en demanda](notebooks/30_data_science_ml/DS-02-estacionalidad.ipynb)
 - `BA-01`: [Dashboard OTIF (On-Time In-Full)](notebooks/40_business_analytics_bi/BA-01-dashboard_otif.ipynb)
+- `BA-02`: [Planeación S&OP con escenarios de demanda](notebooks/40_business_analytics_bi/BA-02-sop_scenarios.ipynb)
 - `OR-01`: [Cálculo de stock de seguridad](notebooks/50_optimization_or/OR-01-stock_seguridad.ipynb)
 - `OR-02`: [VRP con restricción de capacidad](notebooks/50_optimization_or/OR-02-vrp_capacidad.ipynb)
 - `RT-01`: [Simulación de stream de tracking](notebooks/60_realtime_iot/RT-01-stream_tracking.ipynb)
