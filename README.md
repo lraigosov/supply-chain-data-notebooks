@@ -121,3 +121,5 @@ F:\GitHub\supply-chain-data-notebooks\.venv\Scripts\papermill.exe \
 - Autor y mantenimiento: **lraigosov**.
 - Contenidos (notebooks y documentación): **CC BY 4.0** — requiere atribución al autor. Ver `LICENSE`.
 - Código auxiliar (cuando aplique): licencia permisiva indicada en metadatos del proyecto.
+- Desarrollo asistido por **GitHub Copilot Free** (code completions, refactoring, documentation).
+- Análisis automatizado con **GitHub Copilot Actions** (code review, security scanning).
