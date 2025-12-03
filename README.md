@@ -68,6 +68,20 @@ F:\GitHub\supply-chain-data-notebooks\.venv\Scripts\papermill.exe \
 └── README.md
 ```
 
+## Índice de Notebooks
+- `DE-01`: [Ingesta batch desde WMS a DWH](notebooks/10_data_engineering/DE-01-ingesta.ipynb)
+- `DE-02`: [Pipeline incremental de órdenes](notebooks/10_data_engineering/DE-02-pipeline_incremental.ipynb)
+- `DA-01`: [Modelo dimensional para inventarios](notebooks/20_data_architecture/DA-01-modelo_dimensional.ipynb)
+- `DS-01`: [EDA de órdenes e inventarios](notebooks/30_data_science_ml/DS-01-eda.ipynb)
+- `DS-02`: [Detección de estacionalidad en demanda](notebooks/30_data_science_ml/DS-02-estacionalidad.ipynb)
+- `BA-01`: [Dashboard OTIF (On-Time In-Full)](notebooks/40_business_analytics_bi/BA-01-dashboard_otif.ipynb)
+- `OR-01`: [Cálculo de stock de seguridad](notebooks/50_optimization_or/OR-01-stock_seguridad.ipynb)
+- `OR-02`: [VRP con restricción de capacidad](notebooks/50_optimization_or/OR-02-vrp_capacidad.ipynb)
+- `RT-01`: [Simulación de stream de tracking](notebooks/60_realtime_iot/RT-01-stream_tracking.ipynb)
+- `GEN-01`: [RAG para consultas de KPIs](notebooks/70_ai_gen_agents/GEN-01-rag_kpi.ipynb)
+- `DG-01`: [Perfilado de calidad de datos maestro](notebooks/80_governance_quality/DG-01-perfilado_calidad.ipynb)
+- `CAP-01`: [Torre de control](notebooks/90_capstone_end2end/CAP-01-torre_control.ipynb)
+
 ## Recursos
 - Catálogo de notebooks: `config/notebooks_index.yml`
 - Diccionario de datos: `docs/data_dictionary.md`
@@ -77,5 +91,7 @@ F:\GitHub\supply-chain-data-notebooks\.venv\Scripts\papermill.exe \
 - `bases/` existe en el repositorio; no está ignorada por Git.
 - No se incluyen ni documentan contenidos fuera del árbol del repositorio.
 
-## Licencia
-Uso educativo y demostrativo.
+## Créditos y Licencia
+- Autor y mantenimiento: **lraigosov**.
+- Contenidos (notebooks y documentación): **CC BY 4.0** — requiere atribución al autor. Ver `LICENSE`.
+- Código auxiliar (cuando aplique): licencia permisiva indicada en metadatos del proyecto.
