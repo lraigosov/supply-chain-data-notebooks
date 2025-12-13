@@ -78,15 +78,18 @@ python data/synthetic_generators/generate_cli.py
 
 **Volumen:** acorde al generador; número de eventos por orden puede variar
 
-## gtfs_local.zip / gtfs_sample.zip
-Archivos estándar GTFS (General Transit Feed Specification) ubicados en `data/raw/` para pruebas de transporte masivo en `TR-01`.
+## gtfs_local.zip / gtfs_sample.zip (opcional)
 
-| Archivo | Descripción |
-|---------|-------------|
-| `gtfs_local.zip` | Muestra local de GTFS para pruebas rápidas |
-| `gtfs_sample.zip` | Paquete GTFS de ejemplo con rutas, trips y paradas |
+Archivos estándar GTFS (General Transit Feed Specification) para pruebas de transporte masivo en `TR-01`.
+
+| Archivo | Descripción | Ubicación |
+|---------|-------------|-----------|
+| `gtfs_local.zip` | Muestra local de GTFS para pruebas rápidas | `data/raw/` (no en repo) |
+| `gtfs_sample.zip` | Paquete GTFS de ejemplo con rutas, trips y paradas | `data/raw/` (no en repo) |
 
 **Uso:** Leídos por el notebook `notebooks/60_realtime_iot/TR-01-transporte_masivo.ipynb` usando librerías como `partridge` o `gtfs_kit`.
+
+**Nota:** Estos archivos son opcionales. El notebook TR-01 puede funcionar sin ellos usando datos de muestra incluidos.
 
 ---
 

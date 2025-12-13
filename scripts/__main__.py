@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 """
-Wrapper for catalog CLI. Enables: python -m scripts.catalog <command>
+Entry point for scripts module. Enables: python -m scripts <command>
 """
-from scripts.catalog import main
+from scripts.cli import main
 
 if __name__ == "__main__":
     main()
