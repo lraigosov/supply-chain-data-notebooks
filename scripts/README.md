@@ -74,24 +74,6 @@ python -m scripts validate --type metadata
 
 # Solo estructura
 python -m scripts validate --type structure
-
-# Especificar directorio
-python -m scripts validate --notebooks-dir notebooks/30_data_science_ml
-```
-
-#### 🔧 **fix-metadata** - Corregir Metadatos
-
-Corregir automáticamente metadatos en notebooks.
-
-```bash
-# Corregir metadatos
-python -m scripts fix-metadata
-
-# Preview sin aplicar cambios
-python -m scripts fix-metadata --dry-run
-
-# Directorio específico
-python -m scripts fix-metadata --notebooks-dir notebooks/10_data_engineering
 ```
 
 #### 📄 **export-html** - Exportar Catálogo a HTML
@@ -106,25 +88,13 @@ python -m scripts export-html
 python -m scripts export-html --output /custom/path/catalog.html
 ```
 
-#### 📝 **update-readme** - Actualizar README
+#### 🧭 **update-navigation** - Actualizar Navegación
 
-Actualizar tabla de notebooks en README.md.
-
-```bash
-# Actualizar tabla automáticamente
-python -m scripts update-readme
-```
-
-#### 🧭 **add-navigation** - Añadir Navegación
-
-Añadir sección de navegación al final de todos los notebooks.
+Actualizar sección de navegación en todos los notebooks con formato markdown legible.
 
 ```bash
-# Añadir navegación a todos los notebooks
-python -m scripts add-navigation
-
-# Forzar actualización (sobrescribir existente)
-python -m scripts add-navigation --force
+# Actualizar navegación de todos los notebooks
+python -m scripts update-navigation
 ```
 
 #### 🧪 **smoke-test** - Tests Rápidos
@@ -232,27 +202,19 @@ python scripts/export_catalog_html.py
 python scripts/export_catalog_html.py --output custom.html
 ```
 
-### 📝 generate_notebook_catalog.py
+### 🧭 update_navigation.py
 
-**Propósito**: Actualizar tabla de notebooks en README.md.
-
-**Uso directo**:
-```bash
-python scripts/generate_notebook_catalog.py
-```
-
-### 🧭 add_navigation.py
-
-**Propósito**: Añadir navegación entre notebooks.
+**Propósito**: Actualizar navegación entre notebooks con formato markdown legible.
 
 **Características**:
-- Enlaces anterior/siguiente automáticos
+- Enlaces anterior/siguiente automáticos con nombres completos de archivo
+- Formato markdown simple y legible (sin HTML)
 - Enlaces al índice del proyecto
 - Respeta orden de notebooks_index.yml
 
 **Uso directo**:
 ```bash
-python scripts/add_navigation.py
+python scripts/update_navigation.py
 ```
 
 ### 🧪 smoke_test_notebooks.py
@@ -298,14 +260,12 @@ cp notebooks/00_common/TEMPLATE.ipynb notebooks/30_data_science_ml/DS-08-new.ipy
 
 # 2. Editar y añadir al índice (config/notebooks_index.yml)
 
-# 3. Añadir navegación
-python -m scripts add-navigation
+# 3. Actualizar navegación y catálogo
+python -m scripts update-navigation
+python -m scripts export-html
 
 # 4. Validar
 python -m scripts validate
-
-# 5. Actualizar README
-python -m scripts update-readme
 ```
 
 #### 2. Mantenimiento del Proyecto
@@ -314,8 +274,8 @@ python -m scripts update-readme
 # Validar todo el proyecto
 python -m scripts validate
 
-# Corregir metadatos automáticamente
-python -m scripts fix-metadata
+# Actualizar navegación de notebooks
+python -m scripts update-navigation
 
 # Regenerar catálogo HTML
 python -m scripts export-html
@@ -408,10 +368,8 @@ scripts/
 ├── catalog.py                      # Gestión de catálogo
 ├── validate_notebook_metadata.py  # Validación de metadatos
 ├── validate_notebook_structure.py # Validación de estructura
-├── fix_notebook_metadata.py       # Corrección de metadatos
 ├── export_catalog_html.py         # Exportar a HTML
-├── generate_notebook_catalog.py   # Actualizar README
-├── add_navigation.py              # Añadir navegación
+├── update_navigation.py           # Actualizar navegación
 ├── smoke_test_notebooks.py        # Tests rápidos
 ├── validate_requirements.py       # Validar dependencias
 └── README.md                      # Esta documentación
@@ -422,7 +380,7 @@ scripts/
 ## 🎯 Buenas Prácticas
 
 1. **Validar antes de commit**: Ejecutar `python -m scripts validate` antes de hacer commit
-2. **Mantener navegación actualizada**: Después de añadir notebooks, ejecutar `add-navigation`
+2. **Mantener navegación actualizada**: Después de añadir notebooks, ejecutar `update-navigation`
 3. **Actualizar catálogo**: Regenerar HTML después de cambios mayores
 4. **Smoke tests regulares**: Ejecutar antes de releases
 5. **Documentar cambios**: Actualizar notebooks_index.yml con nueva información

@@ -6,20 +6,19 @@ Uso:
     python -m scripts <comando> [opciones]
 
 Comandos disponibles:
-    catalog         - Navegar y ejecutar notebooks del catálogo
-    validate        - Validar estructura y metadatos de notebooks
-    fix-metadata    - Corregir metadatos de notebooks
-    export-html     - Exportar catálogo a HTML
-    update-readme   - Actualizar tabla de notebooks en README
-    add-navigation  - Añadir navegación a notebooks
-    smoke-test      - Ejecutar tests rápidos de notebooks
-    validate-reqs   - Validar requirements.lock
+    catalog            - Navegar y ejecutar notebooks del catálogo
+    validate           - Validar estructura y metadatos de notebooks
+    export-html        - Exportar catálogo a HTML
+    update-navigation  - Actualizar navegación de notebooks
+    smoke-test         - Ejecutar tests rápidos de notebooks
+    validate-reqs      - Validar requirements.lock
 
 Ejemplos:
     python -m scripts catalog list
-    python -m scripts validate --notebooks-dir notebooks/
+    python -m scripts validate
     python -m scripts export-html
-    python -m scripts add-navigation
+    python -m scripts update-navigation
+    python -m scripts smoke-test
 """
 from __future__ import annotations
 
@@ -64,27 +63,6 @@ def main():
         default="all",
         help="Tipo de validación"
     )
-    validate_parser.add_argument(
-        "--notebooks-dir",
-        default="notebooks",
-        help="Directorio de notebooks"
-    )
-    
-    # Fix metadata command
-    fix_parser = subparsers.add_parser(
-        "fix-metadata",
-        help="Corregir metadatos de notebooks"
-    )
-    fix_parser.add_argument(
-        "--notebooks-dir",
-        default="notebooks",
-        help="Directorio de notebooks"
-    )
-    fix_parser.add_argument(
-        "--dry-run",
-        action="store_true",
-        help="Mostrar cambios sin aplicarlos"
-    )
     
     # Export HTML command
     export_parser = subparsers.add_parser(
@@ -96,21 +74,10 @@ def main():
         help="Ruta de salida para el HTML"
     )
     
-    # Update README command
-    readme_parser = subparsers.add_parser(
-        "update-readme",
-        help="Actualizar tabla de notebooks en README"
-    )
-    
-    # Add navigation command
+    # Update navigation command
     nav_parser = subparsers.add_parser(
-        "add-navigation",
-        help="Añadir navegación a notebooks"
-    )
-    nav_parser.add_argument(
-        "--force",
-        action="store_true",
-        help="Forzar actualización incluso si ya existe"
+        "update-navigation",
+        help="Actualizar navegación de notebooks"
     )
     
     # Smoke test command
@@ -169,13 +136,6 @@ def main():
         
         return 0
     
-    elif args.command == "fix-metadata":
-        from scripts.fix_notebook_metadata import main as fix_main
-        sys.argv = ["fix_notebook_metadata"]
-        if args.dry_run:
-            sys.argv.append("--dry-run")
-        return fix_main()
-    
     elif args.command == "export-html":
         from scripts.export_catalog_html import main as export_main
         sys.argv = ["export_catalog_html"]
@@ -183,12 +143,8 @@ def main():
             sys.argv.extend(["--output", args.output])
         return export_main()
     
-    elif args.command == "update-readme":
-        from scripts.generate_notebook_catalog import main as readme_main
-        return readme_main()
-    
-    elif args.command == "add-navigation":
-        from scripts.add_navigation import main as nav_main
+    elif args.command == "update-navigation":
+        from scripts.update_navigation import main as nav_main
         return nav_main()
     
     elif args.command == "smoke-test":

@@ -264,13 +264,15 @@ supply-chain-data-notebooks/
 │   ├── 80_governance_quality/       # 1 notebook (DG-01)
 │   ├── 90_capstone_end2end/         # 1 notebook (CAP-01)
 │   └── 99_utilidades/               # 2 notebooks (AP-01, SI-09)
-├── scripts/                         # Herramientas CLI y validación (12 archivos)
+├── scripts/                         # Herramientas CLI y validación (11 archivos)
 │   ├── cli.py                       # CLI unificado principal (python -m scripts)
 │   ├── catalog.py                   # Listar, ejecutar, filtrar notebooks
-│   ├── add_navigation.py            # Añadir navegación entre notebooks
+│   ├── update_navigation.py         # Actualizar navegación entre notebooks
 │   ├── validate_notebook_*.py       # Validación de metadatos y estructura
 │   ├── export_catalog_html.py       # Generar catálogo HTML interactivo
 │   ├── smoke_test_notebooks.py      # Tests rápidos de ejecución
+│   ├── validate_requirements.py     # Validar dependencias
+│   ├── __init__.py, __main__.py     # Módulo Python
 │   └── README.md                    # Documentación completa de scripts
 ├── src/                             # Código reutilizable
 │   └── utils/                       # Configuración, I/O, logging, paths
