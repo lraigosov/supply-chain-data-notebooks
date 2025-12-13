@@ -1,6 +1,9 @@
 # Catálogo de Casos de Uso
 
-Catálogo de los notebooks presentes en el repositorio, organizados por especialidad. Se basa en el contenido real de `notebooks/`.
+Descripción detallada de cada notebook implementado en el repositorio, organizado por especialidad. 
+Basado en el contenido real de los 42 notebooks en `notebooks/`.
+
+**Total de notebooks:** 40 (9 intro, 28 intermediate, 3 advanced)
 
 ## 10_data_engineering/
 
@@ -145,29 +148,84 @@ Catálogo de los notebooks presentes en el repositorio, organizados por especial
 - **Datasets:** gtfs_local.zip, gtfs_sample.zip (archivos GTFS estándar en `data/raw/`)
 - **Tiempo estimado:** 55 min
 
-## 70_ai_gen_agents/
+### OR-07: Cálculo de Stock de Seguridad (Intro)
+- **Nivel:** Intro
+- **Tags:** safety-stock, inventory, statistics
+- **Datasets:** orders.csv
+- **Propósito:** Introducción simplificada al cálculo de stock de seguridad para líderes operacionales.
 
-### GEN-01: RAG (Retrieval Augmented Generation) para consultas de KPIs
-- **Nivel:** Avanzado
-- **Tags:** rag, llm, ai, tfidf, embeddings
+### OR-08: Programación de Producción con PuLP
+- **Nivel:** Intermediate
+- **Tags:** production-scheduling, linear-programming, pulp, optimization
+- **Datasets:** Genera datos sintéticos
+- **Propósito:** Programar producción minimizando makespan, cambios de setup, tardíos.
+
+### OR-09: Optimización de Red Logística Multiobjetivo
+- **Nivel:** Advanced
+- **Tags:** network-optimization, multi-objective, facility-location
+- **Datasets:** Genera datos sintéticos
+- **Propósito:** Decidir ubicación óptima de plantas y DCs balanceando costo, cobertura, resiliencia.
+
+## 60_realtime_iot/ (5 notebooks)
+
+### RT-01: Simulación de stream de tracking GPS
+- **Nivel:** Intro
+- **Tags:** stream, tracking, iot, async, geofencing
+- **Datasets:** transport_events.csv
+- **Tiempo estimado:** 40 min
+
+### RT-02: Mantenimiento predictivo de flota
+- **Nivel:** Intermediate
+- **Tags:** predictive, maintenance, classification
+- **Datasets:** Genera datos sintéticos internos
+
+### RT-03: Monitoreo de cadena de frío
+- **Nivel:** Intermediate
+- **Tags:** cold-chain, temperature, alerts
+- **Datasets:** Genera series de temperatura sintéticas
+
+### RT-04: Visualización Básica de Sensores IoT
+- **Nivel:** Intro
+- **Tags:** iot, sensors, visualization, monitoring
+- **Datasets:** Genera datos sintéticos de sensores
+- **Propósito:** Introducción a lectura y visualización de datos IoT en tiempo real.
+
+### TR-01: Análisis de transporte masivo con GTFS
+- **Nivel:** Intermediate
+- **Tags:** gtfs, transit, geospatial, geopandas, folium
+- **Datasets:** gtfs_local.zip, gtfs_sample.zip (archivos GTFS estándar en `data/raw/`)
+- **Tiempo estimado:** 55 min
+
+## 70_ai_gen_agents/ (2 notebooks)
+
+### GEN-01: RAG para consultas de KPIs
+- **Nivel:** Intro
+- **Tags:** rag, llm, ai, embeddings, retrieval
 - **Datasets:** Corpus de KPIs internos
 - **Tiempo estimado:** 60 min
+- **Propósito:** Sistema que responde preguntas sobre KPIs usando RAG (Retrieval Augmented Generation).
 
-## 80_governance_quality/
+### GEN-02: LLM para Análisis de Texto en Supply Chain
+- **Nivel:** Intermediate
+- **Tags:** llm, nlp, text-analysis, gemini, classification, sentiment
+- **Datasets:** Reclamaciones de clientes (texto)
+- **Propósito:** Clasificar, categorizar y analizar sentimiento en quejas/reclamaciones automáticamente usando Gemini API.
+
+## 80_governance_quality/ (1 notebook)
 
 ### DG-01: Perfilado de calidad de datos maestro
-- **Nivel:** Intermedio
+- **Nivel:** Intermediate
 - **Tags:** quality, profiling, data-governance, validation
 - **Datasets:** products.csv
 
-## 90_capstone_end2end/
+## 90_capstone_end2end/ (1 notebook)
 
 ### CAP-01: Torre de control (dashboard integrado)
-- **Nivel:** Intermedio
+- **Nivel:** Intermediate
 - **Tags:** capstone, dashboard, kpi, integration
 - **Datasets:** orders.csv, inventory.csv, transport_events.csv
 
-## 99_utilidades/
+## 99_utilidades/ (2 notebooks)
 
 ### AP-01: Apply en DataFrames - Tutorial de pandas
 - **Nivel:** Intro
@@ -175,10 +233,37 @@ Catálogo de los notebooks presentes en el repositorio, organizados por especial
 - **Datasets:** Genera ejemplos sintéticos
 
 ### SI-09: Flujo ML end-to-end con scikit-learn
-- **Nivel:** Intermedio
+- **Nivel:** Intermediate
 - **Tags:** ml, pipeline, logistic-regression, validation
 - **Datasets:** Genera ejemplos sintéticos
 
 ---
 
-**Referencia:** `config/notebooks_index.yml`
+## Resumen por Nivel
+
+| Nivel | Cantidad | Descripción |
+|-------|----------|-------------|
+| **Intro** | 9 | 15-30 min, conceptos fundamentales, sin prerequisitos |
+| **Intermediate** | 28 | 30-60 min, aplicaciones prácticas, algunos prerequisitos |
+| **Advanced** | 3 | 60+ min, casos complejos de producción, teoría avanzada |
+
+## Resumen por Especialidad
+
+| Especialidad | Notebooks | Propósito |
+|--------------|-----------|----------|
+| Data Engineering | 4 | ETL, pipelines, streaming |
+| Data Architecture | 2 | Modelado, data lakes, governance |
+| Data Science/ML | 7 | EDA, forecasting, classification, risk |
+| Business Analytics | 6 | KPIs, dashboards, S&OP |
+| Optimization/OR | 10 | Inventario, routing, scheduling, capacity |
+| Realtime/IoT | 5 | Streaming, tracking, sensors, GTFS |
+| AI Generativa | 2 | RAG, LLM, text analysis |
+| Data Governance | 1 | Calidad, profiling |
+| Capstone | 1 | Integración end-to-end |
+| Utilidades | 2 | Tutoriales, fundamentos |
+| **TOTAL** | **40** | **Plataforma educativa ejecutable** |
+
+---
+
+**Referencia**: `config/notebooks_index.yml`
+**Última actualización**: Diciembre 2025

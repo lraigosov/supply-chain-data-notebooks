@@ -16,6 +16,7 @@ notebooks = [
   "jupyter",
   "papermill",
   "nbconvert",
+  "nbclient",
 ]
 core = [
   "pandas",
@@ -29,6 +30,7 @@ core = [
   "statsmodels",
   "scipy",
   "networkx",
+  "joblib",
   "pyyaml",
 ]
 or = [

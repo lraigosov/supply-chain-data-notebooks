@@ -2,6 +2,19 @@
 
 Diccionario de datos para los archivos CSV generados sintéticamente en `data/raw/`.
 
+**Nota importante**: Estos archivos NO están incluidos en el repositorio (ver `.gitignore`). Se generan localmente mediante:
+```bash
+python data/synthetic_generators/generate_cli.py
+```
+
+**Volúmenes típicos** (con parámetros por defecto):
+- **products.csv**: ~200 SKUs
+- **locations.csv**: ~10-15 ubicaciones
+- **orders.csv**: ~10,000-50,000 órdenes (90 días)
+- **inventory.csv**: ~2,000-3,000 registros
+- **transport_events.csv**: ~50,000+ eventos
+- **calendar.csv**: 90-365 días
+
 ## products.csv
 | Campo | Tipo | Descripción |
 |-------|------|-------------|
@@ -74,3 +87,23 @@ Archivos estándar GTFS (General Transit Feed Specification) ubicados en `data/r
 | `gtfs_sample.zip` | Paquete GTFS de ejemplo con rutas, trips y paradas |
 
 **Uso:** Leídos por el notebook `notebooks/60_realtime_iot/TR-01-transporte_masivo.ipynb` usando librerías como `partridge` o `gtfs_kit`.
+
+---
+
+## Características de los Datos Sintéticos
+
+Los datos generados incluyen:
+
+✅ **Realismo**: Distribuciones estadísticas basadas en patrones reales del sector logístico  
+✅ **Estacionalidad**: Picos en festivos y promociones  
+✅ **Variabilidad**: Noise realista en demanda, delays, temperatura  
+✅ **Reproducibilidad**: Generación con `--seed` para resultados idénticos  
+✅ **Escalabilidad**: Parámetros configurables (días, SKUs, volumen)  
+
+**No contienen información sensible o real**. Todos los valores son sintéticos.
+
+---
+
+**Generador**: `data/synthetic_generators/generate_data.py`  
+**CLI**: `data/synthetic_generators/generate_cli.py`  
+**Última actualización**: Diciembre 2025
