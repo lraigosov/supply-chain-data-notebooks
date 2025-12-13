@@ -15,6 +15,24 @@ notebooks:
     tags: [pipeline, incremental, orders]
     path: notebooks/10_data_engineering/DE-02-pipeline_incremental.ipynb
     dataset_deps: [orders.csv]
+  - id: "DE-03"
+    title: "ETL Básico con Pandas"
+    specialty: "Data Engineering"
+    process: "Enable"
+    level: "Intro"
+    tags: [etl, pandas, data-engineering, csv, data-cleaning]
+    path: notebooks/10_data_engineering/DE-03-etl_basico.ipynb
+    dataset_deps: [orders.csv, products.csv, locations.csv]
+    estimated_time_min: 25
+  - id: "DE-04"
+    title: "Pipeline Streaming con Kafka"
+    specialty: "Data Engineering"
+    process: "Enable"
+    level: "Advanced"
+    tags: [kafka, streaming, realtime, pipeline, data-engineering]
+    path: notebooks/10_data_engineering/DE-04-kafka_streaming.ipynb
+    dataset_deps: [transport_events.csv]
+    estimated_time_min: 65
   - id: "DA-01"
     title: "Modelo dimensional para inventarios"
     specialty: "Data Architecture"
@@ -24,6 +42,15 @@ notebooks:
     path: notebooks/20_data_architecture/DA-01-modelo_dimensional.ipynb
     dataset_deps: [inventory.csv, products.csv, locations.csv]
     estimated_time_min: 60
+  - id: "DA-02"
+    title: "Data Lake con Particiones"
+    specialty: "Data Architecture"
+    process: "Enable"
+    level: "Intermediate"
+    tags: [data-lake, parquet, partitioning, architecture, big-data]
+    path: notebooks/20_data_architecture/DA-02-data_lake_partitions.ipynb
+    dataset_deps: [orders.csv, inventory.csv, transport_events.csv]
+    estimated_time_min: 40
   - id: "DS-01"
     title: "EDA de órdenes e inventarios"
     specialty: "Data Science"
@@ -64,6 +91,24 @@ notebooks:
     tags: [risk, supply, scenarios]
     path: notebooks/30_data_science_ml/DS-05-supply_risk_scenarios.ipynb
     dataset_deps: []
+  - id: "DS-06"
+    title: "Forecast de Demanda con ARIMA"
+    specialty: "Data Science"
+    process: "Plan"
+    level: "Intermediate"
+    tags: [forecast, arima, time-series, demand-planning, statistics]
+    path: notebooks/30_data_science_ml/DS-06-forecast_arima.ipynb
+    dataset_deps: [orders.csv, calendar.csv, products.csv]
+    estimated_time_min: 55
+  - id: "DS-07"
+    title: "ML Clasificación de Riesgo de Proveedores"
+    specialty: "Data Science"
+    process: "Source"
+    level: "Advanced"
+    tags: [machine-learning, classification, risk, suppliers, scikit-learn]
+    path: notebooks/30_data_science_ml/DS-07-supplier_risk_ml.ipynb
+    dataset_deps: [orders.csv, products.csv]
+    estimated_time_min: 60
   - id: "BA-01"
     title: "Dashboard OTIF (On-Time In-Full)"
     specialty: "Business Analytics"
@@ -106,6 +151,15 @@ notebooks:
     tags: [supplier, kpi, reliability]
     path: notebooks/40_business_analytics_bi/BA-04-supplier_performance.ipynb
     dataset_deps: [orders.csv]
+  - id: "BA-05"
+    title: "Dashboard Ejecutivo de Supply Chain"
+    specialty: "Business Analytics"
+    process: "Enable"
+    level: "Intro"
+    tags: [dashboard, kpi, executive, plotly, metrics]
+    path: notebooks/40_business_analytics_bi/BA-05-dashboard_ejecutivo.ipynb
+    dataset_deps: [orders.csv, inventory.csv, transport_events.csv, locations.csv]
+    estimated_time_min: 35
   - id: "OR-01"
     title: "Cálculo de stock de seguridad"
     specialty: "Optimization & OR"
@@ -166,6 +220,33 @@ notebooks:
     tags: [queueing, simulation, mmc]
     path: notebooks/50_optimization_or/OR-06-dock_queue_simulation.ipynb
     dataset_deps: []
+  - id: "OR-07"
+    title: "Cálculo de Stock de Seguridad"
+    specialty: "Optimization & OR"
+    process: "Plan"
+    level: "Intro"
+    tags: [inventory, safety-stock, optimization, operations, demand-variability]
+    path: notebooks/50_optimization_or/OR-07-safety_stock_intro.ipynb
+    dataset_deps: [orders.csv, products.csv, inventory.csv]
+    estimated_time_min: 30
+  - id: "OR-08"
+    title: "Programación de Producción con PuLP"
+    specialty: "Optimization & OR"
+    process: "Make"
+    level: "Intermediate"
+    tags: [optimization, pulp, linear-programming, production, scheduling]
+    path: notebooks/50_optimization_or/OR-08-production_scheduling.ipynb
+    dataset_deps: [orders.csv, products.csv]
+    estimated_time_min: 50
+  - id: "OR-09"
+    title: "Optimización de Red Logística Multiobjetivo"
+    specialty: "Optimization & OR"
+    process: "Plan"
+    level: "Advanced"
+    tags: [optimization, network-design, ortools, multi-objective, facility-location]
+    path: notebooks/50_optimization_or/OR-09-network_optimization.ipynb
+    dataset_deps: [locations.csv, orders.csv]
+    estimated_time_min: 70
   - id: "RT-01"
     title: "Simulación de stream de tracking"
     specialty: "Realtime & IoT"
@@ -198,6 +279,15 @@ notebooks:
     tags: [gtfs, transit, geospatial]
     path: notebooks/60_realtime_iot/TR-01-transporte_masivo.ipynb
     dataset_deps: [gtfs_local.zip, gtfs_sample.zip]
+  - id: "RT-04"
+    title: "Visualización Básica de Sensores IoT"
+    specialty: "Realtime & IoT"
+    process: "Deliver"
+    level: "Intro"
+    tags: [iot, sensors, realtime, visualization, monitoring]
+    path: notebooks/60_realtime_iot/RT-04-iot_sensors_intro.ipynb
+    dataset_deps: [transport_events.csv, locations.csv]
+    estimated_time_min: 30
   - id: "GEN-01"
     title: "RAG para consultas de KPIs"
     specialty: "AI Generativa"
@@ -206,6 +296,15 @@ notebooks:
     tags: [rag, kpi]
     path: notebooks/70_ai_gen_agents/GEN-01-rag_kpi.ipynb
     dataset_deps: []
+  - id: "GEN-02"
+    title: "LLM para Análisis de Texto en Supply Chain"
+    specialty: "AI Generativa"
+    process: "Enable"
+    level: "Intermediate"
+    tags: [llm, openai, nlp, text-analysis, ai, sentiment]
+    path: notebooks/70_ai_gen_agents/GEN-02-llm_text_analysis.ipynb
+    dataset_deps: [orders.csv, products.csv]
+    estimated_time_min: 45
   - id: "DG-01"
     title: "Perfilado de calidad de datos maestro"
     specialty: "Data Governance"

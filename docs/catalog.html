@@ -1,0 +1,728 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supply Chain Notebooks Catalog</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+        
+        .controls {
+            padding: 30px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e0e0e0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .control-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .control-group label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+            font-size: 0.9em;
+        }
+        
+        input[type="text"],
+        select {
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 0.95em;
+            background: white;
+        }
+        
+        input[type="text"]:focus,
+        select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75em;
+            font-weight: 600;
+            color: white;
+        }
+        
+        .badge-intro {
+            background: #10b981;
+        }
+        
+        .badge-intermediate {
+            background: #f59e0b;
+        }
+        
+        .badge-advanced {
+            background: #ef4444;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: #e0e7ff;
+            color: #667eea;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.75em;
+            margin-right: 4px;
+        }
+        
+        .table-wrapper {
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95em;
+        }
+        
+        thead {
+            background: #f3f4f6;
+            border-bottom: 2px solid #e5e7eb;
+        }
+        
+        th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            color: #374151;
+        }
+        
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        tbody tr:hover {
+            background: #f9fafb;
+        }
+        
+        .id {
+            font-family: monospace;
+            color: #667eea;
+            font-weight: 600;
+            width: 80px;
+        }
+        
+        .title {
+            font-weight: 500;
+            color: #1f2937;
+            max-width: 250px;
+        }
+        
+        .notebook a {
+            color: #667eea;
+            text-decoration: none;
+            font-family: monospace;
+            font-size: 0.85em;
+        }
+        
+        .notebook a:hover {
+            text-decoration: underline;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        footer {
+            background: #f3f4f6;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            border-top: 1px solid #e5e7eb;
+        }
+        
+        .stats {
+            padding: 30px;
+            background: white;
+            text-align: center;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        .stat {
+            display: inline-block;
+            margin: 0 30px;
+        }
+        
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📚 Supply Chain Data Notebooks</h1>
+            <p>Plataforma ejecutable para líderes de supply chain</p>
+        </header>
+        
+        <div class="controls">
+            <div class="control-group">
+                <label>Buscar:</label>
+                <input type="text" id="search" placeholder="Título, ID, tag...">
+            </div>
+            <div class="control-group">
+                <label>Especialidad:</label>
+                <select id="specialty">
+                    <option value="">Todas</option>
+                    <option value="AI Generativa">AI Generativa</option><option value="Business Analytics">Business Analytics</option><option value="Capstone">Capstone</option><option value="Data Architecture">Data Architecture</option><option value="Data Engineering">Data Engineering</option><option value="Data Governance">Data Governance</option><option value="Data Science">Data Science</option><option value="Optimization & OR">Optimization & OR</option><option value="Realtime & IoT">Realtime & IoT</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <label>Nivel:</label>
+                <select id="level">
+                    <option value="">Todos</option>
+                    <option value="Intro">Intro</option>
+                    <option value="Intermediate">Intermedio</option>
+                    <option value="Advanced">Avanzado</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Título</th>
+                        <th>Especialidad</th>
+                        <th>Nivel</th>
+                        <th>Duración</th>
+                        <th>Datasets</th>
+                        <th>Tags</th>
+                        <th>Notebook</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+                    
+        <tr data-specialty="Data Engineering" data-level="Intermediate" data-tags="etl,warehouse,inventory,python,sql">
+            <td class="id"><strong>DE-01</strong></td>
+            <td class="title">Ingesta batch desde WMS a DWH</td>
+            <td class="specialty"><small>Data Engineering</small></td>
+            <td class="level"><span class="badge badge-intermediate">Intermediate</span></td>
+            <td class="duration"><small>-</small></td>
+            <td class="datasets"><small>products.csv, orders.csv, inventory.csv</small></td>
+            <td class="tags"><small><span class="tag">etl</span> <span class="tag">warehouse</span> <span class="tag">inventory</span> <span class="tag">python</span> <span class="tag">sql</span></small></td>
+            <td class="notebook"><a href="notebooks/10_data_engineering/DE-01-ingesta.ipynb" target="_blank">DE-01-ingesta.ipynb</a></td>
+        </tr>
+        
+        <tr data-specialty="Data Engineering" data-level="Intermediate" data-tags="pipeline,incremental,orders">
+            <td class="id"><strong>DE-02</strong></td>
+            <td class="title">Pipeline incremental de órdenes</td>
+            <td class="specialty"><small>Data Engineering</small></td>
+            <td class="level"><span class="badge badge-intermediate">Intermediate</span></td>
+            <td class="duration"><small>-</small></td>
+            <td class="datasets"><small>orders.csv</small></td>
+            <td class="tags"><small><span class="tag">pipeline</span> <span class="tag">incremental</span> <span class="tag">orders</span></small></td>
+            <td class="notebook"><a href="notebooks/10_data_engineering/DE-02-pipeline_incremental.ipynb" target="_blank">DE-02-pipeline_incremental.ipynb</a></td>
+        </tr>
+        
+        <tr data-specialty="Data Engineering" data-level="Intro" data-tags="etl,pandas,data-engineering,csv,data-cleaning">
+            <td class="id"><strong>DE-03</strong></td>
+            <td class="title">ETL Básico con Pandas</td>
+            <td class="specialty"><small>Data Engineering</small></td>
+            <td class="level"><span class="badge badge-intro">Intro</span></td>
+            <td class="duration"><small>25m</small></td>
+            <td class="datasets"><small>orders.csv, products.csv, locations.csv</small></td>
+            <td class="tags"><small><span class="tag">etl</span> <span class="tag">pandas</span> <span class="tag">data-engineering</span> <span class="tag">csv</span> <span class="tag">data-cleaning</span></small></td>
+            <td class="notebook"><a href="notebooks/10_data_engineering/DE-03-etl_basico.ipynb" target="_blank">DE-03-etl_basico.ipynb</a></td>
+        </tr>
+        
+        <tr data-specialty="Data Engineering" data-level="Advanced" data-tags="kafka,streaming,realtime,pipeline,data-engineering">
+            <td class="id"><strong>DE-04</strong></td>
+            <td class="title">Pipeline Streaming con Kafka</td>
+            <td class="specialty"><small>Data Engineering</small></td>
+            <td class="level"><span class="badge badge-advanced">Advanced</span></td>
+            <td class="duration"><small>65m</small></td>
+            <td class="datasets"><small>transport_events.csv</small></td>
+            <td class="tags"><small><span class="tag">kafka</span> <span class="tag">streaming</span> <span class="tag">realtime</span> <span class="tag">pipeline</span> <span class="tag">data-engineering</span></small></td>
+            <td class="notebook"><a href="notebooks/10_data_engineering/DE-04-kafka_streaming.ipynb" target="_blank">DE-04-kafka_streaming.ipynb</a></td>
+        </tr>
+        
+        <tr data-specialty="Data Architecture" data-level="Intermediate" data-tags="dimensional-modeling,star-schema,inventory,data-warehouse,analytics">
+            <td class="id"><strong>DA-01</strong></td>
+            <td class="title">Modelo dimensional para inventarios</td>
+            <td class="specialty"><small>Data Architecture</small></td>
+            <td class="level"><span class="badge badge-intermediate">Intermediate</span></td>
+            <td class="duration"><small>60m</small></td>
+            <td class="datasets"><small>inventory.csv, products.csv, locations.csv</small></td>
+            <td class="tags"><small><span class="tag">dimensional-modeling</span> <span class="tag">star-schema</span> <span class="tag">inventory</span> <span class="tag">data-warehouse</span> <span class="tag">analytics</span></small></td>
+            <td class="notebook"><a href="notebooks/20_data_architecture/DA-01-modelo_dimensional.ipynb" target="_blank">DA-01-modelo_dimensional.ipynb</a></td>
+        </tr>
+        
+        <tr data-specialty="Data Architecture" data-level="Intermediate" data-tags="data-lake,parquet,partitioning,architecture,big-data">
+            <td class="id"><strong>DA-02</strong></td>
+            <td class="title">Data Lake con Particiones</td>
+            <td class="specialty"><small>Data Architecture</small></td>
+            <td class="level"><span class="badge badge-intermediate">Intermediate</span></td>
+            <td class="duration"><small>40m</small></td>
+            <td class="datasets"><small>orders.csv, inventory.csv, transport_events.csv</small></td>
+            <td class="tags"><small><span class="tag">data-lake</span> <span class="tag">parquet</span> <span class="tag">partitioning</span> <span class="tag">architecture</span> <span class="tag">big-data</span></small></td>
+            <td class="notebook"><a href="notebooks/20_data_architecture/DA-02-data_lake_partitions.ipynb" target="_blank">DA-02-data_lake_partitions.ipynb</a></td>
+        </tr>
+        
+        <tr data-specialty="Data Science" data-level="Intro" data-tags="eda,pandas,plot">
+            <td class="id"><strong>DS-01</strong></td>
+            <td class="title">EDA de órdenes e inventarios</td>
+            <td class="specialty"><small>Data Science</small></td>
+            <td class="level"><span class="badge badge-intro">Intro</span></td>
+            <td class="duration"><small>-</small></td>
+            <td class="datasets"><small>orders.csv, inventory.csv</small></td>
+            <td class="tags"><small><span class="tag">eda</span> <span class="tag">pandas</span> <span class="tag">plot</span></small></td>
+            <td class="notebook"><a href="notebooks/30_data_science_ml/DS-01-eda.ipynb" target="_blank">DS-01-eda.ipynb</a></td>
+        </tr>
+        
+        <tr data-specialty="Data Science" data-level="Intermediate" data-tags="seasonality,forecast,statsmodels">
+            <td class="id"><strong>DS-02</strong></td>
+            <td class="title">Detección de estacionalidad en demanda</td>
+            <td class="specialty"><small>Data Science</small></td>
+            <td class="level"><span class="badge badge-intermediate">Intermediate</span></td>
+            <td class="duration"><small>-</small></td>
+            <td class="datasets"><small>orders.csv</small></td>
+            <td class="tags"><small><span class="tag">seasonality</span> <span class="tag">forecast</span> <span class="tag">statsmodels</span></small></td>
+            <td class="notebook"><a href="notebooks/30_data_science_ml/DS-02-estacionalidad.ipynb" target="_blank">DS-02-estacionalidad.ipynb</a></td>
+        </tr>
+        
+        <tr data-specialty="Data Science" data-level="Intermediate" data-tags="service-level,cost,optimization">
+            <td class="id"><strong>DS-03</strong></td>
+            <td class="title">Service level vs cost trade-off</td>
+            <td class="specialty"><small>Data Science</small></td>
+            <td class="level"><span class="badge badge-intermediate">Intermediate</span></td>
+            <td class="duration"><small>-</small></td>
+            <td class="datasets"><small>orders.csv, inventory.csv</small></td>
+            <td class="tags"><small><span class="tag">service-level</span> <span class="tag">cost</span> <span class="tag">optimization</span></small></td>
+            <td class="notebook"><a href="notebooks/30_data_science_ml/DS-03-service_level_cost_tradeoff.ipynb" target="_blank">DS-03-service_level_cost_tradeoff.ipynb</a></td>
+        </tr>
+        
+        <tr data-specialty="Data Science" data-level="Intermediate" data-tags="last-mile,delivery,kpi">
+            <td class="id"><strong>DS-04</strong></td>
+            <td class="title">Last mile analytics</td>
+            <td class="specialty"><small>Data Science</small></td>
+            <td class="level"><span class="badge badge-intermediate">Intermediate</span></td>
+            <td class="duration"><small>-</small></td>
+            <td class="datasets"><small>transport_events.csv</small></td>
+            <td class="tags"><small><span class="tag">last-mile</span> <span class="tag">delivery</span> <span class="tag">kpi</span></small></td>
+            <td class="notebook"><a href="notebooks/30_data_science_ml/DS-04-last_mile_analytics.ipynb" target="_blank">DS-04-last_mile_analytics.ipynb</a></td>
+        </tr>
+        
+        <tr data-specialty="Data Science" data-level="Intermediate" data-tags="risk,supply,scenarios">
+            <td class="id"><strong>DS-05</strong></td>
+            <td class="title">Supply risk scenarios</td>
+            <td class="specialty"><small>Data Science</small></td>
+            <td class="level"><span class="badge badge-intermediate">Intermediate</span></td>
+            <td class="duration"><small>-</small></td>
+            <td class="datasets"><small>-</small></td>
+            <td class="tags"><small><span class="tag">risk</span> <span class="tag">supply</span> <span class="tag">scenarios</span></small></td>
+            <td class="notebook"><a href="notebooks/30_data_science_ml/DS-05-supply_risk_scenarios.ipynb" target="_blank">DS-05-supply_risk_scenarios.ipynb</a></td>
+        </tr>
+        
+        <tr data-specialty="Data Science" data-level="Intermediate" data-tags="forecast,arima,time-series,demand-planning,statistics">
+            <td class="id"><strong>DS-06</strong></td>
+            <td class="title">Forecast de Demanda con ARIMA</td>
+            <td class="specialty"><small>Data Science</small></td>
+            <td class="level"><span class="badge badge-intermediate">Intermediate</span></td>
+            <td class="duration"><small>55m</small></td>
+            <td class="datasets"><small>orders.csv, calendar.csv, products.csv</small></td>
+            <td class="tags"><small><span class="tag">forecast</span> <span class="tag">arima</span> <span class="tag">time-series</span> <span class="tag">demand-planning</span> <span class="tag">statistics</span></small></td>
+            <td class="notebook"><a href="notebooks/30_data_science_ml/DS-06-forecast_arima.ipynb" target="_blank">DS-06-forecast_arima.ipynb</a></td>
+        </tr>
+        
+        <tr data-specialty="Data Science" data-level="Advanced" data-tags="machine-learning,classification,risk,suppliers,scikit-learn">
+            <td class="id"><strong>DS-07</strong></td>
+            <td class="title">ML Clasificación de Riesgo de Proveedores</td>
+            <td class="specialty"><small>Data Science</small></td>
+            <td class="level"><span class="badge badge-advanced">Advanced</span></td>
+            <td class="duration"><small>60m</small></td>
+            <td class="datasets"><small>orders.csv, products.csv</small></td>
+            <td class="tags"><small><span class="tag">machine-learning</span> <span class="tag">classification</span> <span class="tag">risk</span> <span class="tag">suppliers</span> <span class="tag">scikit-learn</span></small></td>
+            <td class="notebook"><a href="notebooks/30_data_science_ml/DS-07-supplier_risk_ml.ipynb" target="_blank">DS-07-supplier_risk_ml.ipynb</a></td>
+        </tr>
+        
+        <tr data-specialty="Business Analytics" data-level="Intermediate" data-tags="otif,kpi,delivery,dashboard,analytics,service-level">
+            <td class="id"><strong>BA-01</strong></td>
+            <td class="title">Dashboard OTIF (On-Time In-Full)</td>
+            <td class="specialty"><small>Business Analytics</small></td>
+            <td class="level"><span class="badge badge-intermediate">Intermediate</span></td>
+            <td class="duration"><small>50m</small></td>
+            <td class="datasets"><small>orders.csv, transport_events.csv, locations.csv</small></td>
+            <td class="tags"><small><span class="tag">otif</span> <span class="tag">kpi</span> <span class="tag">delivery</span> <span class="tag">dashboard</span> <span class="tag">analytics</span> <span class="tag">service-level</span></small></td>
+            <td class="notebook"><a href="notebooks/40_business_analytics_bi/BA-01-dashboard_otif.ipynb" target="_blank">BA-01-dashboard_otif.ipynb</a></td>
+        </tr>
+        
+        <tr data-specialty="Business Analytics" data-level="Intermediate" data-tags="cost-to-serve,profitability">
+            <td class="id"><strong>BA-02-CTS</strong></td>
+            <td class="title">Cost-to-Serve</td>
+            <td class="specialty"><small>Business Analytics</small></td>
+            <td class="level"><span class="badge badge-intermediate">Intermediate</span></td>
+            <td class="duration"><small>-</small></td>
+            <td class="datasets"><small>orders.csv, transport_events.csv</small></td>
+            <td class="tags"><small><span class="tag">cost-to-serve</span> <span class="tag">profitability</span></small></td>
+            <td class="notebook"><a href="notebooks/40_business_analytics_bi/BA-02-cost_to_serve.ipynb" target="_blank">BA-02-cost_to_serve.ipynb</a></td>
+        </tr>
+        
+        <tr data-specialty="Business Analytics" data-level="Intermediate" data-tags="sop,scenarios,capacity,backlog,fill-rate">
+            <td class="id"><strong>BA-02</strong></td>
+            <td class="title">Planeación S&OP con escenarios de demanda</td>
+            <td class="specialty"><small>Business Analytics</small></td>
+            <td class="level"><span class="badge badge-intermediate">Intermediate</span></td>
+            <td class="duration"><small>45m</small></td>
+            <td class="datasets"><small>-</small></td>
+            <td class="tags"><small><span class="tag">sop</span> <span class="tag">scenarios</span> <span class="tag">capacity</span> <span class="tag">backlog</span> <span class="tag">fill-rate</span></small></td>
+            <td class="notebook"><a href="notebooks/40_business_analytics_bi/BA-02-sop_scenarios.ipynb" target="_blank">BA-02-sop_scenarios.ipynb</a></td>
+        </tr>
+        
+        <tr data-specialty="Business Analytics" data-level="Intermediate" data-tags="warehouse,productivity,kpi">
+            <td class="id"><strong>BA-03</strong></td>
+            <td class="title">Productividad de almacén</td>
+            <td class="specialty"><small>Business Analytics</small></td>
+            <td class="level"><span class="badge badge-intermediate">Intermediate</span></td>
+            <td class="duration"><small>-</small></td>
+            <td class="datasets"><small>inventory.csv, orders.csv</small></td>
+            <td class="tags"><small><span class="tag">warehouse</span> <span class="tag">productivity</span> <span class="tag">kpi</span></small></td>
+            <td class="notebook"><a href="notebooks/40_business_analytics_bi/BA-03-warehouse_productivity.ipynb" target="_blank">BA-03-warehouse_productivity.ipynb</a></td>
+        </tr>
+        
+        <tr data-specialty="Business Analytics" data-level="Intermediate" data-tags="supplier,kpi,reliability">
+            <td class="id"><strong>BA-04</strong></td>
+            <td class="title">Desempeño de proveedores</td>
+            <td class="specialty"><small>Business Analytics</small></td>
+            <td class="level"><span class="badge badge-intermediate">Intermediate</span></td>
+            <td class="duration"><small>-</small></td>
+            <td class="datasets"><small>orders.csv</small></td>
+            <td class="tags"><small><span class="tag">supplier</span> <span class="tag">kpi</span> <span class="tag">reliability</span></small></td>
+            <td class="notebook"><a href="notebooks/40_business_analytics_bi/BA-04-supplier_performance.ipynb" target="_blank">BA-04-supplier_performance.ipynb</a></td>
+        </tr>
+        
+        <tr data-specialty="Business Analytics" data-level="Intro" data-tags="dashboard,kpi,executive,plotly,metrics">
+            <td class="id"><strong>BA-05</strong></td>
+            <td class="title">Dashboard Ejecutivo de Supply Chain</td>
+            <td class="specialty"><small>Business Analytics</small></td>
+            <td class="level"><span class="badge badge-intro">Intro</span></td>
+            <td class="duration"><small>35m</small></td>
+            <td class="datasets"><small>orders.csv, inventory.csv, transport_events.csv, locations.csv</small></td>
+            <td class="tags"><small><span class="tag">dashboard</span> <span class="tag">kpi</span> <span class="tag">executive</span> <span class="tag">plotly</span> <span class="tag">metrics</span></small></td>
+            <td class="notebook"><a href="notebooks/40_business_analytics_bi/BA-05-dashboard_ejecutivo.ipynb" target="_blank">BA-05-dashboard_ejecutivo.ipynb</a></td>
+        </tr>
+        
+        <tr data-specialty="Optimization & OR" data-level="Intermediate" data-tags="safety-stock,inventory,optimization,service-level,statistics">
+            <td class="id"><strong>OR-01</strong></td>
+            <td class="title">Cálculo de stock de seguridad</td>
+            <td class="specialty"><small>Optimization & OR</small></td>
+            <td class="level"><span class="badge badge-intermediate">Intermediate</span></td>
+            <td class="duration"><small>55m</small></td>
+            <td class="datasets"><small>orders.csv, products.csv</small></td>
+            <td class="tags"><small><span class="tag">safety-stock</span> <span class="tag">inventory</span> <span class="tag">optimization</span> <span class="tag">service-level</span> <span class="tag">statistics</span></small></td>
+            <td class="notebook"><a href="notebooks/50_optimization_or/OR-01-stock_seguridad.ipynb" target="_blank">OR-01-stock_seguridad.ipynb</a></td>
+        </tr>
+        
+        <tr data-specialty="Optimization & OR" data-level="Intermediate" data-tags="inventory,eoq,optimization">
+            <td class="id"><strong>OR-02-EOQ</strong></td>
+            <td class="title">Políticas de inventario (EOQ)</td>
+            <td class="specialty"><small>Optimization & OR</small></td>
+            <td class="level"><span class="badge badge-intermediate">Intermediate</span></td>
+            <td class="duration"><small>50m</small></td>
+            <td class="datasets"><small>-</small></td>
+            <td class="tags"><small><span class="tag">inventory</span> <span class="tag">eoq</span> <span class="tag">optimization</span></small></td>
+            <td class="notebook"><a href="notebooks/50_optimization_or/OR-02-politicas_inventario.ipynb" target="_blank">OR-02-politicas_inventario.ipynb</a></td>
+        </tr>
+        
+        <tr data-specialty="Optimization & OR" data-level="Advanced" data-tags="vrp,routing,optimization,pulp,capacity,last-mile">
+            <td class="id"><strong>OR-02-VRP</strong></td>
+            <td class="title">VRP con restricción de capacidad</td>
+            <td class="specialty"><small>Optimization & OR</small></td>
+            <td class="level"><span class="badge badge-advanced">Advanced</span></td>
+            <td class="duration"><small>65m</small></td>
+            <td class="datasets"><small>-</small></td>
+            <td class="tags"><small><span class="tag">vrp</span> <span class="tag">routing</span> <span class="tag">optimization</span> <span class="tag">pulp</span> <span class="tag">capacity</span> <span class="tag">last-mile</span></small></td>
+            <td class="notebook"><a href="notebooks/50_optimization_or/OR-02-vrp_capacidad.ipynb" target="_blank">OR-02-vrp_capacidad.ipynb</a></td>
+        </tr>
+        
+        <tr data-specialty="Optimization & OR" data-level="Advanced" data-tags="capacity,warehouse,fleet,linear-programming,pulp">
+            <td class="id"><strong>OR-03</strong></td>
+            <td class="title">Planeación de capacidad en CD y flota</td>
+            <td class="specialty"><small>Optimization & OR</small></td>
+            <td class="level"><span class="badge badge-advanced">Advanced</span></td>
+            <td class="duration"><small>60m</small></td>
+            <td class="datasets"><small>-</small></td>
+            <td class="tags"><small><span class="tag">capacity</span> <span class="tag">warehouse</span> <span class="tag">fleet</span> <span class="tag">linear-programming</span> <span class="tag">pulp</span></small></td>
+            <td class="notebook"><a href="notebooks/50_optimization_or/OR-03-capacity_planning_dc_fleet.ipynb" target="_blank">OR-03-capacity_planning_dc_fleet.ipynb</a></td>
+        </tr>
+        
+        <tr data-specialty="Optimization & OR" data-level="Advanced" data-tags="multi-echelon,inventory">
+            <td class="id"><strong>OR-04</strong></td>
+            <td class="title">Inventario multi‑echelon</td>
+            <td class="specialty"><small>Optimization & OR</small></td>
+            <td class="level"><span class="badge badge-advanced">Advanced</span></td>
+            <td class="duration"><small>-</small></td>
+            <td class="datasets"><small>-</small></td>
+            <td class="tags"><small><span class="tag">multi-echelon</span> <span class="tag">inventory</span></small></td>
+            <td class="notebook"><a href="notebooks/50_optimization_or/OR-04-multi_echelon_inventory.ipynb" target="_blank">OR-04-multi_echelon_inventory.ipynb</a></td>
+        </tr>
+        
+        <tr data-specialty="Optimization & OR" data-level="Intermediate" data-tags="slotting,warehouse,layout">
+            <td class="id"><strong>OR-05</strong></td>
+            <td class="title">Warehouse slotting</td>
+            <td class="specialty"><small>Optimization & OR</small></td>
+            <td class="level"><span class="badge badge-intermediate">Intermediate</span></td>
+            <td class="duration"><small>-</small></td>
+            <td class="datasets"><small>-</small></td>
+            <td class="tags"><small><span class="tag">slotting</span> <span class="tag">warehouse</span> <span class="tag">layout</span></small></td>
+            <td class="notebook"><a href="notebooks/50_optimization_or/OR-05-warehouse_slotting.ipynb" target="_blank">OR-05-warehouse_slotting.ipynb</a></td>
+        </tr>
+        
+        <tr data-specialty="Optimization & OR" data-level="Intermediate" data-tags="queueing,simulation,mmc">
+            <td class="id"><strong>OR-06</strong></td>
+            <td class="title">Simulación de colas en andenes</td>
+            <td class="specialty"><small>Optimization & OR</small></td>
+            <td class="level"><span class="badge badge-intermediate">Intermediate</span></td>
+            <td class="duration"><small>-</small></td>
+            <td class="datasets"><small>-</small></td>
+            <td class="tags"><small><span class="tag">queueing</span> <span class="tag">simulation</span> <span class="tag">mmc</span></small></td>
+            <td class="notebook"><a href="notebooks/50_optimization_or/OR-06-dock_queue_simulation.ipynb" target="_blank">OR-06-dock_queue_simulation.ipynb</a></td>
+        </tr>
+        
+        <tr data-specialty="Optimization & OR" data-level="Intro" data-tags="inventory,safety-stock,optimization,operations,demand-variability">
+            <td class="id"><strong>OR-07</strong></td>
+            <td class="title">Cálculo de Stock de Seguridad</td>
+            <td class="specialty"><small>Optimization & OR</small></td>
+            <td class="level"><span class="badge badge-intro">Intro</span></td>
+            <td class="duration"><small>30m</small></td>
+            <td class="datasets"><small>orders.csv, products.csv, inventory.csv</small></td>
+            <td class="tags"><small><span class="tag">inventory</span> <span class="tag">safety-stock</span> <span class="tag">optimization</span> <span class="tag">operations</span> <span class="tag">demand-variability</span></small></td>
+            <td class="notebook"><a href="notebooks/50_optimization_or/OR-07-safety_stock_intro.ipynb" target="_blank">OR-07-safety_stock_intro.ipynb</a></td>
+        </tr>
+        
+        <tr data-specialty="Optimization & OR" data-level="Intermediate" data-tags="optimization,pulp,linear-programming,production,scheduling">
+            <td class="id"><strong>OR-08</strong></td>
+            <td class="title">Programación de Producción con PuLP</td>
+            <td class="specialty"><small>Optimization & OR</small></td>
+            <td class="level"><span class="badge badge-intermediate">Intermediate</span></td>
+            <td class="duration"><small>50m</small></td>
+            <td class="datasets"><small>orders.csv, products.csv</small></td>
+            <td class="tags"><small><span class="tag">optimization</span> <span class="tag">pulp</span> <span class="tag">linear-programming</span> <span class="tag">production</span> <span class="tag">scheduling</span></small></td>
+            <td class="notebook"><a href="notebooks/50_optimization_or/OR-08-production_scheduling.ipynb" target="_blank">OR-08-production_scheduling.ipynb</a></td>
+        </tr>
+        
+        <tr data-specialty="Optimization & OR" data-level="Advanced" data-tags="optimization,network-design,ortools,multi-objective,facility-location">
+            <td class="id"><strong>OR-09</strong></td>
+            <td class="title">Optimización de Red Logística Multiobjetivo</td>
+            <td class="specialty"><small>Optimization & OR</small></td>
+            <td class="level"><span class="badge badge-advanced">Advanced</span></td>
+            <td class="duration"><small>70m</small></td>
+            <td class="datasets"><small>locations.csv, orders.csv</small></td>
+            <td class="tags"><small><span class="tag">optimization</span> <span class="tag">network-design</span> <span class="tag">ortools</span> <span class="tag">multi-objective</span> <span class="tag">facility-location</span></small></td>
+            <td class="notebook"><a href="notebooks/50_optimization_or/OR-09-network_optimization.ipynb" target="_blank">OR-09-network_optimization.ipynb</a></td>
+        </tr>
+        
+        <tr data-specialty="Realtime & IoT" data-level="Intro" data-tags="stream,tracking">
+            <td class="id"><strong>RT-01</strong></td>
+            <td class="title">Simulación de stream de tracking</td>
+            <td class="specialty"><small>Realtime & IoT</small></td>
+            <td class="level"><span class="badge badge-intro">Intro</span></td>
+            <td class="duration"><small>-</small></td>
+            <td class="datasets"><small>transport_events.csv</small></td>
+            <td class="tags"><small><span class="tag">stream</span> <span class="tag">tracking</span></small></td>
+            <td class="notebook"><a href="notebooks/60_realtime_iot/RT-01-stream_tracking.ipynb" target="_blank">RT-01-stream_tracking.ipynb</a></td>
+        </tr>
+        
+        <tr data-specialty="Realtime & IoT" data-level="Intermediate" data-tags="predictive,maintenance,classification">
+            <td class="id"><strong>RT-02</strong></td>
+            <td class="title">Mantenimiento predictivo de flota</td>
+            <td class="specialty"><small>Realtime & IoT</small></td>
+            <td class="level"><span class="badge badge-intermediate">Intermediate</span></td>
+            <td class="duration"><small>-</small></td>
+            <td class="datasets"><small>-</small></td>
+            <td class="tags"><small><span class="tag">predictive</span> <span class="tag">maintenance</span> <span class="tag">classification</span></small></td>
+            <td class="notebook"><a href="notebooks/60_realtime_iot/RT-02-fleet_predictive_maintenance.ipynb" target="_blank">RT-02-fleet_predictive_maintenance.ipynb</a></td>
+        </tr>
+        
+        <tr data-specialty="Realtime & IoT" data-level="Intermediate" data-tags="cold-chain,temperature,alerts">
+            <td class="id"><strong>RT-03</strong></td>
+            <td class="title">Monitoreo de cadena de frío</td>
+            <td class="specialty"><small>Realtime & IoT</small></td>
+            <td class="level"><span class="badge badge-intermediate">Intermediate</span></td>
+            <td class="duration"><small>-</small></td>
+            <td class="datasets"><small>-</small></td>
+            <td class="tags"><small><span class="tag">cold-chain</span> <span class="tag">temperature</span> <span class="tag">alerts</span></small></td>
+            <td class="notebook"><a href="notebooks/60_realtime_iot/RT-03-cold_chain_monitoring.ipynb" target="_blank">RT-03-cold_chain_monitoring.ipynb</a></td>
+        </tr>
+        
+        <tr data-specialty="Realtime & IoT" data-level="Intermediate" data-tags="gtfs,transit,geospatial">
+            <td class="id"><strong>TR-01</strong></td>
+            <td class="title">Análisis de transporte masivo con GTFS</td>
+            <td class="specialty"><small>Realtime & IoT</small></td>
+            <td class="level"><span class="badge badge-intermediate">Intermediate</span></td>
+            <td class="duration"><small>-</small></td>
+            <td class="datasets"><small>gtfs_local.zip, gtfs_sample.zip</small></td>
+            <td class="tags"><small><span class="tag">gtfs</span> <span class="tag">transit</span> <span class="tag">geospatial</span></small></td>
+            <td class="notebook"><a href="notebooks/60_realtime_iot/TR-01-transporte_masivo.ipynb" target="_blank">TR-01-transporte_masivo.ipynb</a></td>
+        </tr>
+        
+        <tr data-specialty="Realtime & IoT" data-level="Intro" data-tags="iot,sensors,realtime,visualization,monitoring">
+            <td class="id"><strong>RT-04</strong></td>
+            <td class="title">Visualización Básica de Sensores IoT</td>
+            <td class="specialty"><small>Realtime & IoT</small></td>
+            <td class="level"><span class="badge badge-intro">Intro</span></td>
+            <td class="duration"><small>30m</small></td>
+            <td class="datasets"><small>transport_events.csv, locations.csv</small></td>
+            <td class="tags"><small><span class="tag">iot</span> <span class="tag">sensors</span> <span class="tag">realtime</span> <span class="tag">visualization</span> <span class="tag">monitoring</span></small></td>
+            <td class="notebook"><a href="notebooks/60_realtime_iot/RT-04-iot_sensors_intro.ipynb" target="_blank">RT-04-iot_sensors_intro.ipynb</a></td>
+        </tr>
+        
+        <tr data-specialty="AI Generativa" data-level="Intro" data-tags="rag,kpi">
+            <td class="id"><strong>GEN-01</strong></td>
+            <td class="title">RAG para consultas de KPIs</td>
+            <td class="specialty"><small>AI Generativa</small></td>
+            <td class="level"><span class="badge badge-intro">Intro</span></td>
+            <td class="duration"><small>-</small></td>
+            <td class="datasets"><small>-</small></td>
+            <td class="tags"><small><span class="tag">rag</span> <span class="tag">kpi</span></small></td>
+            <td class="notebook"><a href="notebooks/70_ai_gen_agents/GEN-01-rag_kpi.ipynb" target="_blank">GEN-01-rag_kpi.ipynb</a></td>
+        </tr>
+        
+        <tr data-specialty="AI Generativa" data-level="Intermediate" data-tags="llm,openai,nlp,text-analysis,ai,sentiment">
+            <td class="id"><strong>GEN-02</strong></td>
+            <td class="title">LLM para Análisis de Texto en Supply Chain</td>
+            <td class="specialty"><small>AI Generativa</small></td>
+            <td class="level"><span class="badge badge-intermediate">Intermediate</span></td>
+            <td class="duration"><small>45m</small></td>
+            <td class="datasets"><small>orders.csv, products.csv</small></td>
+            <td class="tags"><small><span class="tag">llm</span> <span class="tag">openai</span> <span class="tag">nlp</span> <span class="tag">text-analysis</span> <span class="tag">ai</span> <span class="tag">sentiment</span></small></td>
+            <td class="notebook"><a href="notebooks/70_ai_gen_agents/GEN-02-llm_text_analysis.ipynb" target="_blank">GEN-02-llm_text_analysis.ipynb</a></td>
+        </tr>
+        
+        <tr data-specialty="Data Governance" data-level="Intro" data-tags="quality,profiling">
+            <td class="id"><strong>DG-01</strong></td>
+            <td class="title">Perfilado de calidad de datos maestro</td>
+            <td class="specialty"><small>Data Governance</small></td>
+            <td class="level"><span class="badge badge-intro">Intro</span></td>
+            <td class="duration"><small>-</small></td>
+            <td class="datasets"><small>products.csv</small></td>
+            <td class="tags"><small><span class="tag">quality</span> <span class="tag">profiling</span></small></td>
+            <td class="notebook"><a href="notebooks/80_governance_quality/DG-01-perfilado_calidad.ipynb" target="_blank">DG-01-perfilado_calidad.ipynb</a></td>
+        </tr>
+        
+        <tr data-specialty="Capstone" data-level="Intro" data-tags="capstone,dashboard">
+            <td class="id"><strong>CAP-01</strong></td>
+            <td class="title">Torre de control</td>
+            <td class="specialty"><small>Capstone</small></td>
+            <td class="level"><span class="badge badge-intro">Intro</span></td>
+            <td class="duration"><small>-</small></td>
+            <td class="datasets"><small>orders.csv</small></td>
+            <td class="tags"><small><span class="tag">capstone</span> <span class="tag">dashboard</span></small></td>
+            <td class="notebook"><a href="notebooks/90_capstone_end2end/CAP-01-torre_control.ipynb" target="_blank">CAP-01-torre_control.ipynb</a></td>
+        </tr>
+        
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-number">38</div>
+                <div class="stat-label">Notebooks</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">9</div>
+                <div class="stat-label">Especialidades</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">105</div>
+                <div class="stat-label">Tags únicos</div>
+            </div>
+        </div>
+        
+        <footer>
+            Generado automáticamente | <a href="https://github.com/lraigosov/supply-chain-data-notebooks" style="color: #667eea;">GitHub</a>
+        </footer>
+    </div>
+    
+    <script>
+        const searchInput = document.getElementById("search");
+        const specialtySelect = document.getElementById("specialty");
+        const levelSelect = document.getElementById("level");
+        const tableBody = document.getElementById("table-body");
+        const rows = Array.from(tableBody.querySelectorAll("tr"));
+        
+        function filterRows() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const specialty = specialtySelect.value;
+            const level = levelSelect.value;
+            
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                const rowSpecialty = row.dataset.specialty;
+                const rowLevel = row.dataset.level;
+                const rowTags = row.dataset.tags.split(",");
+                
+                const matchSearch = !searchTerm || text.includes(searchTerm) || rowTags.some(tag => tag.toLowerCase().includes(searchTerm));
+                const matchSpecialty = !specialty || rowSpecialty === specialty;
+                const matchLevel = !level || rowLevel === level;
+                
+                row.classList.toggle("hidden", !(matchSearch && matchSpecialty && matchLevel));
+            });
+        }
+        
+        searchInput.addEventListener("input", filterRows);
+        specialtySelect.addEventListener("change", filterRows);
+        levelSelect.addEventListener("change", filterRows);
+    </script>
+</body>
+</html>
+    
