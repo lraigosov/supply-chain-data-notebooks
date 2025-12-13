@@ -32,18 +32,14 @@ def get_navigation_info(notebooks: list, notebook_path: str) -> tuple:
 
 def create_navigation_markdown(prev_nb: dict, next_nb: dict, current_folder: str) -> str:
     """Crea el markdown de navegación con el formato mejorado."""
-    lines = ["---\n", "\n", "## 📚 Navegación\n", "\n"]
+    lines = ["## 📚 Navegación\n", "\n"]
     
     # Enlace anterior
     if prev_nb:
         prev_filename = Path(prev_nb['path']).name
         prev_folder = Path(prev_nb['path']).parent.name
         prev_path = f"../{prev_folder}/{prev_filename}"
-        lines.append(f"- Anterior: [{prev_filename}]({prev_path})\n")
-    
-    # Enlaces fijos
-    lines.append("- Índice del proyecto: [README.md](../../README.md)\n")
-    lines.append("- Catálogo de notebooks: [notebooks_index.yml](../../config/notebooks_index.yml)\n")
+        lines.append(f"**← Anterior:** [{prev_filename}]({prev_path})  \n")
     
     # Enlace siguiente
     if next_nb:
@@ -56,7 +52,13 @@ def create_navigation_markdown(prev_nb: dict, next_nb: dict, current_folder: str
         else:
             next_path = f"../{next_folder}/{next_filename}"
         
-        lines.append(f"- Siguiente: [{next_filename}]({next_path})\n")
+        lines.append(f"**Siguiente →:** [{next_filename}]({next_path})  \n")
+    
+    lines.append("\n")
+    # Enlaces fijos al final
+    lines.append("**📑 Recursos:**  \n")
+    lines.append("• [Índice del proyecto](../../README.md)  \n")
+    lines.append("• [Catálogo completo](../../config/notebooks_index.yml)\n")
     
     return "".join(lines)
 
