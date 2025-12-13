@@ -1,9 +1,9 @@
 # Catálogo de Casos de Uso
 
 Descripción detallada de cada notebook implementado en el repositorio, organizado por especialidad. 
-Basado en el contenido real de los 42 notebooks en `notebooks/`.
+Basado en el contenido real de 40 notebooks ejecutables en `notebooks/` (+ 2 templates en 00_common/).
 
-**Total de notebooks:** 40 (9 intro, 28 intermediate, 3 advanced)
+**Total de notebooks ejecutables:** 40 (9 intro, 28 intermediate, 3 advanced)
 
 ## 10_data_engineering/
 
@@ -150,29 +150,31 @@ Basado en el contenido real de los 42 notebooks en `notebooks/`.
 
 ### OR-07: Cálculo de Stock de Seguridad (Intro)
 - **Nivel:** Intro
-- **Tags:** safety-stock, inventory, statistics
-- **Datasets:** orders.csv
+- **Tags:** inventory, safety-stock, optimization, operations, demand-variability
+- **Datasets:** orders.csv, products.csv, inventory.csv
+- **Tiempo estimado:** 30 min
 - **Propósito:** Introducción simplificada al cálculo de stock de seguridad para líderes operacionales.
 
 ### OR-08: Programación de Producción con PuLP
 - **Nivel:** Intermediate
-- **Tags:** production-scheduling, linear-programming, pulp, optimization
-- **Datasets:** Genera datos sintéticos
+- **Tags:** optimization, pulp, linear-programming, production, scheduling
+- **Datasets:** orders.csv, products.csv
+- **Tiempo estimado:** 50 min
 - **Propósito:** Programar producción minimizando makespan, cambios de setup, tardíos.
 
 ### OR-09: Optimización de Red Logística Multiobjetivo
 - **Nivel:** Advanced
-- **Tags:** network-optimization, multi-objective, facility-location
-- **Datasets:** Genera datos sintéticos
+- **Tags:** optimization, network-design, ortools, multi-objective, facility-location
+- **Datasets:** locations.csv, orders.csv
+- **Tiempo estimado:** 70 min
 - **Propósito:** Decidir ubicación óptima de plantas y DCs balanceando costo, cobertura, resiliencia.
 
 ## 60_realtime_iot/ (5 notebooks)
 
 ### RT-01: Simulación de stream de tracking GPS
 - **Nivel:** Intro
-- **Tags:** stream, tracking, iot, async, geofencing
+- **Tags:** stream, tracking
 - **Datasets:** transport_events.csv
-- **Tiempo estimado:** 40 min
 
 ### RT-02: Mantenimiento predictivo de flota
 - **Nivel:** Intermediate
@@ -186,30 +188,30 @@ Basado en el contenido real de los 42 notebooks en `notebooks/`.
 
 ### RT-04: Visualización Básica de Sensores IoT
 - **Nivel:** Intro
-- **Tags:** iot, sensors, visualization, monitoring
-- **Datasets:** Genera datos sintéticos de sensores
+- **Tags:** iot, sensors, realtime, visualization, monitoring
+- **Datasets:** transport_events.csv, locations.csv
+- **Tiempo estimado:** 30 min
 - **Propósito:** Introducción a lectura y visualización de datos IoT en tiempo real.
 
 ### TR-01: Análisis de transporte masivo con GTFS
 - **Nivel:** Intermediate
-- **Tags:** gtfs, transit, geospatial, geopandas, folium
+- **Tags:** gtfs, transit, geospatial
 - **Datasets:** gtfs_local.zip, gtfs_sample.zip (archivos GTFS estándar en `data/raw/`)
-- **Tiempo estimado:** 55 min
 
 ## 70_ai_gen_agents/ (2 notebooks)
 
 ### GEN-01: RAG para consultas de KPIs
 - **Nivel:** Intro
-- **Tags:** rag, llm, ai, embeddings, retrieval
-- **Datasets:** Corpus de KPIs internos
-- **Tiempo estimado:** 60 min
+- **Tags:** rag, kpi
+- **Datasets:** Genera corpus de KPIs internamente
 - **Propósito:** Sistema que responde preguntas sobre KPIs usando RAG (Retrieval Augmented Generation).
 
 ### GEN-02: LLM para Análisis de Texto en Supply Chain
 - **Nivel:** Intermediate
-- **Tags:** llm, nlp, text-analysis, gemini, classification, sentiment
-- **Datasets:** Reclamaciones de clientes (texto)
-- **Propósito:** Clasificar, categorizar y analizar sentimiento en quejas/reclamaciones automáticamente usando Gemini API.
+- **Tags:** llm, openai, nlp, text-analysis, ai, sentiment
+- **Datasets:** orders.csv, products.csv (genera reclamaciones sintéticas)
+- **Tiempo estimado:** 45 min
+- **Propósito:** Clasificar, categorizar y analizar sentimiento en quejas/reclamaciones. Solicita Gemini API key interactivamente (opcional, incluye modo demo).
 
 ## 80_governance_quality/ (1 notebook)
 

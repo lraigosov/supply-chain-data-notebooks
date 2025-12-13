@@ -96,7 +96,9 @@ graph TD
 - Notebooks organizados en subcarpetas por temática (Engineering, Architecture, Data Science, BI, OR, IoT, GenAI, Governance, Capstone, Utilidades).
 - Datos sintéticos disponibles en `data/raw/` y salidas en `data/processed/`.
 - Ejecución de notebooks verificada con `papermill` en entorno virtual.
-- **40 notebooks** implementados, 100% ejecutables, cubriendo 10 especialidades (+ 2 templates/plantillas).
+- **40 notebooks** implementados + 2 templates, 100% ejecutables, cubriendo 10 especialidades.
+- Sistema de navegación integrado entre notebooks.
+- CLI unificado para gestión y validación (`python -m scripts`).
 
 ## Datos Sintéticos
 
@@ -143,30 +145,41 @@ python data/synthetic_generators/generate_cli.py --fast
 python -m scripts.catalog list | Select-Object -First 5
 ```
 
-## Uso rápido: CLI Catalog
+## Uso rápido: CLI Unificado
 
-Navega y ejecuta notebooks desde la línea de comando sin comandos complejos:
+Navega, valida y ejecuta notebooks desde un CLI centralizado:
 
 ```powershell
-# Listar todos los notebooks
-python -m scripts.catalog list
+# Ver comandos disponibles
+python -m scripts --help
 
-# Filtrar por especialidad
-python -m scripts.catalog list --specialty "Data Science"
-python -m scripts.catalog list --level Intro
+# Listar todos los notebooks
+python -m scripts catalog list
+
+# Filtrar por especialidad y nivel
+python -m scripts catalog list --specialty "Data Science" --level Intro
 
 # Buscar por palabra clave
-python -m scripts.catalog search "inventory"
+python -m scripts catalog search "inventory"
 
 # Ver detalles de un notebook
-python -m scripts.catalog show DS-01
+python -m scripts catalog show DS-01
 
-# Ejecutar un notebook
-python -m scripts.catalog run DS-01
+# Ejecutar notebook(s)
+python -m scripts catalog run DS-01
+python -m scripts catalog run DS-01,DS-02,BA-01 --timeout 600
 
-# Ejecutar múltiples
-python -m scripts.catalog run DS-01,DS-02,BA-01 --timeout 600
+# Validar notebooks
+python -m scripts validate
+
+# Exportar catálogo HTML
+python -m scripts export-html
+
+# Tests rápidos
+python -m scripts smoke-test --ids DS-01,BA-01
 ```
+
+**Más información**: Ver [scripts/README.md](scripts/README.md) para documentación completa del CLI.
 
 ## Rutas de Aprendizaje (Learning Paths)
 
@@ -239,23 +252,26 @@ supply-chain-data-notebooks/
 │   ├── data_dictionary.md           # Esquema de datos sintéticos
 │   ├── use_case_catalog.md          # Descripción detallada de cada notebook
 │   └── catalog.html                 # Catálogo interactivo (generado)
-├── notebooks/                       # 42 Notebooks ejecutables
-│   ├── 00_common/                   # Plantilla y template
+├── notebooks/                       # 42 archivos .ipynb (40 ejecutables + 2 templates)
+│   ├── 00_common/                   # TEMPLATE.ipynb, PLANTILLA.ipynb
 │   ├── 10_data_engineering/         # 4 notebooks (DE-01 a DE-04)
-│   ├── 20_data_architecture/        # 2 notebooks (DA-01 a DA-02)
+│   ├── 20_data_architecture/        # 2 notebooks (DA-01, DA-02)
 │   ├── 30_data_science_ml/          # 7 notebooks (DS-01 a DS-07)
-│   ├── 40_business_analytics_bi/    # 6 notebooks (BA-01 a BA-05)
-│   ├── 50_optimization_or/          # 10 notebooks (OR-01 a OR-09)
+│   ├── 40_business_analytics_bi/    # 6 notebooks (BA-01, BA-02-CTS, BA-02, BA-03, BA-04, BA-05)
+│   ├── 50_optimization_or/          # 10 notebooks (OR-01, OR-02-EOQ, OR-02-VRP, OR-03 a OR-09)
 │   ├── 60_realtime_iot/             # 5 notebooks (RT-01 a RT-04, TR-01)
-│   ├── 70_ai_gen_agents/            # 2 notebooks (GEN-01 a GEN-02)
+│   ├── 70_ai_gen_agents/            # 2 notebooks (GEN-01, GEN-02)
 │   ├── 80_governance_quality/       # 1 notebook (DG-01)
 │   ├── 90_capstone_end2end/         # 1 notebook (CAP-01)
 │   └── 99_utilidades/               # 2 notebooks (AP-01, SI-09)
-├── scripts/                         # Herramientas de CLI y validación
-│   ├── catalog.py                   # CLI principal: listar, ejecutar, filtrar notebooks
-│   ├── smoke_test_notebooks.py      # Validar que todos los notebooks ejecuten
-│   ├── validate_notebook_metadata.py # Auditar metadatos YAML
-│   └── ...                          # Otros scripts de utilidad
+├── scripts/                         # Herramientas CLI y validación (12 archivos)
+│   ├── cli.py                       # CLI unificado principal (python -m scripts)
+│   ├── catalog.py                   # Listar, ejecutar, filtrar notebooks
+│   ├── add_navigation.py            # Añadir navegación entre notebooks
+│   ├── validate_notebook_*.py       # Validación de metadatos y estructura
+│   ├── export_catalog_html.py       # Generar catálogo HTML interactivo
+│   ├── smoke_test_notebooks.py      # Tests rápidos de ejecución
+│   └── README.md                    # Documentación completa de scripts
 ├── src/                             # Código reutilizable
 │   └── utils/                       # Configuración, I/O, logging, paths
 ├── tests/                           # Suite de tests
@@ -273,7 +289,7 @@ supply-chain-data-notebooks/
 - ✅ `data/raw/`, `data/processed/`: No incluidos (generados localmente)
 - ✅ `.venv/`: Entorno virtual (generado localmente)
 - ✅ `*.csv`: Datos procesados (generados localmente)
-- ⚠️ **Secretos**: Únicamente `.env` es ignorado; ningún código contiene claves/tokens
+- ⚠️ **Secretos**: Solo `.env` está ignorado por git. GEN-02 solicita API key interactivamente (opcional, tiene modo demo sin API).
 
 ## Índice de Notebooks (40 implementados)
 
@@ -313,9 +329,6 @@ Tabla completa generada desde `config/notebooks_index.yml`.
 | OR-04 | Inventario multi‑echelon | Optimization & OR | Advanced | [OR-04-multi_echelon_inventory.ipynb](notebooks/50_optimization_or/OR-04-multi_echelon_inventory.ipynb) |
 | OR-05 | Warehouse slotting | Optimization & OR | Intermediate | [OR-05-warehouse_slotting.ipynb](notebooks/50_optimization_or/OR-05-warehouse_slotting.ipynb) |
 | OR-06 | Simulación de colas en andenes | Optimization & OR | Intermediate | [OR-06-dock_queue_simulation.ipynb](notebooks/50_optimization_or/OR-06-dock_queue_simulation.ipynb) |
-| OR-07 | Cálculo de Stock de Seguridad | Optimization & OR | Intro | [OR-07-safety_stock_intro.ipynb](notebooks/50_optimization_or/OR-07-safety_stock_intro.ipynb) |
-| OR-08 | Programación de Producción con PuLP | Optimization & OR | Intermediate | [OR-08-production_scheduling.ipynb](notebooks/50_optimization_or/OR-08-production_scheduling.ipynb) |
-| OR-09 | Optimización de Red Logística Multiobjetivo | Optimization & OR | Advanced | [OR-09-network_optimization.ipynb](notebooks/50_optimization_or/OR-09-network_optimization.ipynb) |
 | OR-07 | Cálculo de Stock de Seguridad | Optimization & OR | Intro | [OR-07-safety_stock_intro.ipynb](notebooks/50_optimization_or/OR-07-safety_stock_intro.ipynb) |
 | OR-08 | Programación de Producción con PuLP | Optimization & OR | Intermediate | [OR-08-production_scheduling.ipynb](notebooks/50_optimization_or/OR-08-production_scheduling.ipynb) |
 | OR-09 | Optimización de Red Logística Multiobjetivo | Optimization & OR | Advanced | [OR-09-network_optimization.ipynb](notebooks/50_optimization_or/OR-09-network_optimization.ipynb) |

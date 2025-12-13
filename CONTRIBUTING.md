@@ -128,10 +128,17 @@ Después de crear tu notebook, agrégalo a `config/notebooks_index.yml`:
   estimated_time_min: 50
 ```
 
-Luego regenera la tabla del README:
+Luego actualiza la documentación:
 
 ```bash
-python scripts/generate_notebook_catalog.py
+# Añadir navegación automática
+python -m scripts add-navigation
+
+# Regenerar tabla del README
+python -m scripts update-readme
+
+# Exportar catálogo HTML
+python -m scripts export-html
 ```
 
 ## Validar tu trabajo
@@ -139,24 +146,30 @@ python scripts/generate_notebook_catalog.py
 Antes de hacer commit:
 
 ```bash
-# 1. Validar metadatos del notebook
-python scripts/validate_notebook_metadata.py
+# 1. Validar metadatos y estructura
+python -m scripts validate
 
-# 2. Validar que instala correctamente
-python -c "import nbformat; print('✓')"
+# 2. Añadir navegación
+python -m scripts add-navigation
 
-# 3. Ejecutar con nbclient (smoke test)
-python -c "from nbclient import execute; execute('your_notebook.ipynb')"
+# 3. Actualizar README
+python -m scripts update-readme
 
-# 4. Ejecutar con papermill (con parámetros si aplica)
-papermill your_notebook.ipynb your_notebook.out.ipynb
-```
-
-## Checklist antes de hacer PR
-
-- [ ] Notebook ejecuta sin errores
+# 4. Ejecutar smoke test
+python -m scripts smoke-test --ids <TU-ID>
+ (`python -m scripts catalog run <ID>`)
 - [ ] Metadatos YAML completos en primera celda
 - [ ] Registrado en `config/notebooks_index.yml`
+- [ ] Validación exitosa (`python -m scripts validate`)
+- [ ] Navegación añadida (`python -m scripts add-navigation`)
+- [ ] README actualizado (`python -m scripts update-readme`)
+- [ ] Datos sintéticos disponibles o generados internamente
+- [ ] Comentarios útiles (no obvios)
+- [ ] Visualizaciones claras con títulos
+- [ ] Salida reproducible (mismo seed cada vez)
+- [ ] Tiempo estimado realista en metadatos
+- [ ] Objetivo es claro para líderes de supply chain
+- [ ] Sin claves/secretos hardcodeadas (usar input interactivo o modo demo)
 - [ ] README regenerado: `python scripts/generate_notebook_catalog.py`
 - [ ] Datos sintéticos disponibles en `data/raw/`
 - [ ] Comentarios útiles (no obvios)

@@ -1,11 +1,12 @@
 """
-Script para corregir metadatos y formato de notebooks
+Script MEJORADO para corregir metadatos y formato de notebooks
 Soluciona:
 1. Agrega bloques de metadatos faltantes
-2. Corrige tipos de celda incorrectos (code/markdown con language incorrecto)
+2. Corrige tipos de celda basándose en el CONTENIDO real
 3. Formatea metadatos para legibilidad
 """
 import json
+import re
 from pathlib import Path
 from typing import Dict, List
 
@@ -79,43 +80,127 @@ NOTEBOOK_METADATA = {
 def create_metadata_cell(metadata: Dict) -> Dict:
     """Crea una celda markdown con el bloque de metadatos YAML bien formateado"""
     lines = [
-        "---",
-        f'id: "{metadata["id"]}"',
-        f'title: "{metadata["title"]}"',
-        f'specialty: "{metadata["specialty"]}"',
-        f'process: "{metadata["process"]}"',
-        f'level: "{metadata["level"]}"',
-        f'tags: {json.dumps(metadata["tags"])}',
-        f'estimated_time_min: {metadata["estimated_time_min"]}',
-        "---"
+        "---\\n",
+        f'id: "{metadata["id"]}"\\n',
+        f'title: "{metadata["title"]}"\\n',
+        f'specialty: "{metadata["specialty"]}"\\n',
+        f'process: "{metadata["process"]}"\\n',
+        f'level: "{metadata["level"]}"\\n',
+        f'tags: {json.dumps(metadata["tags"])}\\n',
+        f'estimated_time_min: {metadata["estimated_time_min"]}\\n',
+        "---\\n"
     ]
     
     return {
         "cell_type": "markdown",
         "metadata": {},
-        "source": ["\\n".join(lines) + "\\n"]
+        "source": lines
     }
 
-def fix_cell_type(cell: Dict) -> Dict:
-    """Corrige el tipo de celda basándose en el contenido y metadata"""
+def is_code_content(source_lines: List[str]) -> bool:
+    """Determina si el contenido es código Python basándose en patrones"""
+    content = ''.join(source_lines).strip()
+    
+    # Patrones que indican código Python
+    code_patterns = [
+        r'^import\s+\w+',  # import statements
+        r'^from\s+\w+\s+import',  # from import
+        r'^\w+\s*=\s*.+',  # assignments
+        r'def\s+\w+\(',  # function definitions
+        r'class\s+\w+',  # class definitions
+        r'\.read_csv\(',  # pandas operations
+        r'\.head\(\)',
+        r'\.plot\(',
+        r'print\(',
+        r'plt\.',
+        r'sns\.',
+        r'pd\.',
+        r'np\.',
+    ]
+    
+    for pattern in code_patterns:
+        if re.search(pattern, content, re.MULTILINE):
+            return True
+    
+    # Si empieza con # pero tiene código después, es código
+    lines = [l.strip() for l in source_lines if l.strip()]
+    if lines and lines[0].startswith('#'):
+        # Ver si hay código en las siguientes líneas
+        for line in lines[1:]:
+            if any(re.search(p, line) for p in code_patterns):
+                return True
+    
+    return False
+
+def is_markdown_content(source_lines: List[str]) -> bool:
+    """Determina si el contenido es Markdown"""
+    content = ''.join(source_lines).strip()
+    
+    # Patrones que indican Markdown
+    markdown_patterns = [
+        r'^#\s+[A-Z]',  # Headers estilo # Title
+        r'^##\s+',  # ## Subtitles
+        r'^\*\*',  # **bold**
+        r'^-\s+',  # - list items
+        r'^\d+\.\s+',  # 1. numbered lists
+        r'^\>',  # > blockquotes
+        r'^\|.+\|',  # | tables |
+        r'---$',  # horizontal rules
+    ]
+    
+    for pattern in markdown_patterns:
+        if re.search(pattern, content, re.MULTILINE):
+            return True
+    
+    return False
+
+def fix_cell_type_smart(cell: Dict) -> tuple[Dict, bool]:
+    """
+    Corrige el tipo de celda basándose en el contenido real
+    Retorna (cell_corregida, cambió)
+    """
     cell_type = cell.get("cell_type", "")
+    source = cell.get("source", [])
+    if isinstance(source, str):
+        source = [source]
+    
+    # Limpiar metadata incorrecto siempre
     metadata = cell.get("metadata", {})
-    language = metadata.get("language", "")
+    language = metadata.get("language")
     
-    # Si el tipo y el language no coinciden, corregir
-    if cell_type == "code" and language == "markdown":
-        cell["cell_type"] = "markdown"
-        # Limpiar metadata para markdown
-        cell["metadata"] = {}
+    cambió = False
+    
+    # Determinar tipo correcto basándose en contenido
+    has_code = is_code_content(source)
+    has_markdown = is_markdown_content(source)
+    
+    # Decidir tipo correcto
+    correct_type = None
+    if has_code and not has_markdown:
+        correct_type = "code"
+    elif has_markdown and not has_code:
+        correct_type = "markdown"
+    elif cell_type == "code" and language == "markdown":
+        correct_type = "markdown"
     elif cell_type == "markdown" and language == "python":
-        cell["cell_type"] = "code"
-        # Asegurar metadata correcto para code
-        cell["metadata"] = {"language": "python"}
-    elif cell_type == "markdown" and language == "markdown":
-        # Redundante, limpiar
-        cell["metadata"] = {}
+        correct_type = "code"
     
-    return cell
+    # Aplicar corrección
+    if correct_type and correct_type != cell_type:
+        cell["cell_type"] = correct_type
+        cambió = True
+    
+    # Limpiar metadata
+    if correct_type == "markdown":
+        cell["metadata"] = {}
+        if language:
+            cambió = True
+    elif correct_type == "code":
+        cell["metadata"] = {}
+        if language:
+            cambió = True
+    
+    return cell, cambió
 
 def has_metadata_block(notebook: Dict) -> bool:
     """Verifica si el notebook tiene un bloque de metadatos YAML"""
@@ -131,7 +216,7 @@ def fix_notebook(notebook_path: Path) -> bool:
     Corrige un notebook específico
     Retorna True si se hicieron cambios
     """
-    print(f"\n🔍 Procesando: {notebook_path.name}")
+    print(f"\\n🔍 Procesando: {notebook_path.name}")
     
     with open(notebook_path, 'r', encoding='utf-8') as f:
         notebook = json.load(f)
@@ -139,18 +224,15 @@ def fix_notebook(notebook_path: Path) -> bool:
     changed = False
     cells = notebook.get("cells", [])
     
-    # 1. Corregir tipos de celda incorrectos
+    # 1. Corregir tipos de celda basándose en contenido
     for i, cell in enumerate(cells):
         original_type = cell.get("cell_type")
-        original_meta = cell.get("metadata", {}).get("language")
-        fixed_cell = fix_cell_type(cell)
-        new_type = fixed_cell.get("cell_type")
-        new_meta = fixed_cell.get("metadata", {}).get("language")
-        
-        if new_type != original_type or new_meta != original_meta:
+        fixed_cell, cell_changed = fix_cell_type_smart(cell)
+        if cell_changed:
             cells[i] = fixed_cell
             changed = True
-            print(f"   ✅ Corregida celda {i+1}: {original_type} ({original_meta}) → {new_type} ({new_meta if new_meta else 'sin language'})")
+            new_type = fixed_cell.get("cell_type")
+            print(f"   ✅ Celda {i+1}: {original_type} → {new_type}")
     
     # 2. Agregar bloque de metadatos si falta
     if notebook_path.name in NOTEBOOK_METADATA and not has_metadata_block(notebook):
@@ -183,7 +265,7 @@ def main():
     
     # Buscar todos los notebooks
     notebook_files = list(notebooks_dir.rglob("*.ipynb"))
-    print(f"\n📊 Encontrados {len(notebook_files)} notebooks")
+    print(f"\\n📊 Encontrados {len(notebook_files)} notebooks")
     
     # Excluir PLANTILLA y checkpoints
     notebook_files = [
@@ -196,7 +278,7 @@ def main():
         if fix_notebook(nb_path):
             fixed_count += 1
     
-    print(f"\n✅ Proceso completado!")
+    print(f"\\n✅ Proceso completado!")
     print(f"📝 Notebooks corregidos: {fixed_count}/{len(notebook_files)}")
 
 if __name__ == "__main__":
