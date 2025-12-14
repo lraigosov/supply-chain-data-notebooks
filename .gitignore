@@ -79,3 +79,5 @@ logs/
 
 # Redis / local services data (if any)
 redis-data/
+
+scripts/
