@@ -1,6 +1,7 @@
 # Script para actualizar el formato de navegación en todos los notebooks
 # Autor: Sistema automatizado
 # Fecha: 2025-12-13
+# Formato de referencia: DE-03-etl_basico.ipynb
 
 $notebooks = @(
     "notebooks\10_data_engineering\DE-01-ingesta.ipynb",
