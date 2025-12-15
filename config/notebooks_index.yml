@@ -321,3 +321,21 @@ notebooks:
     tags: [capstone, dashboard]
     path: notebooks/90_capstone_end2end/CAP-01-torre_control.ipynb
     dataset_deps: [orders.csv]
+  - id: "AP-01"
+    title: "Aplicar Todo DataFrame"
+    specialty: "Utilities"
+    process: "Enable"
+    level: "Intermediate"
+    tags: [pandas, dataframe, vectorization, performance, optimization, etl]
+    path: notebooks/99_utilidades/AP-01-aplicar_todo_dataframe.ipynb
+    dataset_deps: []
+    estimated_time_min: 40
+  - id: "SI-09"
+    title: "Flujo Si9 - Automatización S&OP End-to-End"
+    specialty: "Utilities"
+    process: "Plan"
+    level: "Advanced"
+    tags: [sop, pipeline, automation, machine-learning, workflow, sklearn]
+    path: notebooks/99_utilidades/SI-09-flujo_si9.ipynb
+    dataset_deps: []
+    estimated_time_min: 50

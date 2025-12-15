@@ -52,6 +52,7 @@ Thumbs.db
 !config/*.json
 !config/*.yml
 !config/*.yaml
+data/raw/
 data/processed/
 data/**/tmp/
 data/**/temp/
@@ -80,4 +81,5 @@ logs/
 # Redis / local services data (if any)
 redis-data/
 
+# Scripts (workspace tools, not for distribution)
 scripts/
