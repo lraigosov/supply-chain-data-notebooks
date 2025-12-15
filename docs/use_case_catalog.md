@@ -3,7 +3,7 @@
 Descripción detallada de cada notebook implementado en el repositorio, organizado por especialidad. 
 Basado en el contenido real de 40 notebooks ejecutables en `notebooks/` (+ 2 templates en 00_common/).
 
-**Total de notebooks ejecutables:** 40 (9 intro, 28 intermediate, 3 advanced)
+**Total de notebooks ejecutables:** 40 (9 intro, 24 intermediate, 7 advanced)
 
 ## 10_data_engineering/
 
@@ -197,6 +197,7 @@ Basado en el contenido real de 40 notebooks ejecutables en `notebooks/` (+ 2 tem
 - **Nivel:** Intermediate
 - **Tags:** gtfs, transit, geospatial
 - **Datasets:** gtfs_local.zip, gtfs_sample.zip (archivos GTFS estándar en `data/raw/`)
+- **Tiempo estimado:** 55 min
 
 ## 70_ai_gen_agents/ (2 notebooks)
 
@@ -229,15 +230,19 @@ Basado en el contenido real de 40 notebooks ejecutables en `notebooks/` (+ 2 tem
 
 ## 99_utilidades/ (2 notebooks)
 
-### AP-01: Apply en DataFrames - Tutorial de pandas
-- **Nivel:** Intro
-- **Tags:** pandas, tutorial, performance, dataframe
-- **Datasets:** Genera ejemplos sintéticos
-
-### SI-09: Flujo ML end-to-end con scikit-learn
+### AP-01: Aplicar Todo DataFrame
 - **Nivel:** Intermediate
-- **Tags:** ml, pipeline, logistic-regression, validation
+- **Tags:** pandas, dataframe, vectorization, performance, optimization, etl
 - **Datasets:** Genera ejemplos sintéticos
+- **Tiempo estimado:** 40 min
+- **Propósito:** Técnicas de procesamiento vectorizado de DataFrames para mejorar performance 10-100x vs bucles/apply tradicionales.
+
+### SI-09: Flujo Si9 - Automatización S&OP End-to-End
+- **Nivel:** Advanced
+- **Tags:** sop, pipeline, automation, machine-learning, workflow, sklearn
+- **Datasets:** Genera ejemplos sintéticos
+- **Tiempo estimado:** 50 min
+- **Propósito:** Pipeline automatizado end-to-end para procesos S&OP con ML, reduciendo ciclo de 20 a 5 días.
 
 ---
 
@@ -246,8 +251,8 @@ Basado en el contenido real de 40 notebooks ejecutables en `notebooks/` (+ 2 tem
 | Nivel | Cantidad | Descripción |
 |-------|----------|-------------|
 | **Intro** | 9 | 15-30 min, conceptos fundamentales, sin prerequisitos |
-| **Intermediate** | 28 | 30-60 min, aplicaciones prácticas, algunos prerequisitos |
-| **Advanced** | 3 | 60+ min, casos complejos de producción, teoría avanzada |
+| **Intermediate** | 24 | 30-60 min, aplicaciones prácticas, algunos prerequisitos |
+| **Advanced** | 7 | 60+ min, casos complejos de producción, teoría avanzada |
 
 ## Resumen por Especialidad
 

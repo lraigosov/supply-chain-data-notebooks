@@ -20,29 +20,45 @@ Cada notebook es **100% ejecutable** con datos sintéticos reales del sector.
 ### Flujo de datos y procesamiento
 
 ```mermaid
-graph LR
-    A[Generadores Sintéticos] -->|CSV| B[data/raw/]
-    B -->|Transformación| C[Notebooks de Análisis]
-    C -->|Resultados| D[data/processed/]
-    D -->|Visualización| E[Dashboards Interactivos]
-    C -->|Exportación| F[HTML, CSV, Markdown]
+graph TB
+    subgraph "Generación de Datos"
+        GEN[generate_cli.py] -->|Genera| CSV[CSV Sintéticos<br/>orders, products, inventory, etc.]
+    end
+    
+    subgraph "Capa de Datos"
+        CSV -->|Almacena| RAW[data/raw/<br/>6 archivos CSV principales]
+        RAW -->|Lee| NB[40 Notebooks Ejecutables]
+    end
+    
+    subgraph "Capa de Procesamiento"
+        NB -->|ETL/Transformación| PROC[data/processed/<br/>Resultados por notebook]
+        NB -->|Entrenamiento| MOD[models/<br/>Modelos ML serializados]
+    end
+    
+    subgraph "Capa de Salida"
+        PROC -->|Visualización| DASH[Dashboards Interactivos<br/>Plotly/HTML]
+        PROC -->|Reportes| REP[Markdown/CSV/JSON]
+        MOD -->|Inferencia| PRED[Predicciones]
+    end
+    
+    subgraph "Gestión y Validación"
+        CLI[CLI python -m scripts] -->|Ejecuta| NB
+        CLI -->|Valida| CONF[config/notebooks_index.yml]
+        CLI -->|Genera| CAT[docs/catalog.html]
+    end
 
-    %% Estilos globales (mejor legibilidad)
-    linkStyle default stroke:#475569,stroke-width:2px,color:#334155
-    classDef node fill:#F8FAFC,stroke:#334155,stroke-width:2px,color:#0F172A,rx:10,ry:10,font-weight:600
-    classDef src  fill:#DBEAFE,stroke:#1E40AF,stroke-width:2px,color:#0F172A,rx:10,ry:10,font-weight:700
-    classDef raw  fill:#FFEDD5,stroke:#9A3412,stroke-width:2px,color:#0F172A,rx:10,ry:10,font-weight:700
-    classDef nb   fill:#EDE9FE,stroke:#5B21B6,stroke-width:2px,color:#0F172A,rx:10,ry:10,font-weight:700
-    classDef prc  fill:#DCFCE7,stroke:#166534,stroke-width:2px,color:#0F172A,rx:10,ry:10,font-weight:700
-    classDef dash fill:#FFE4E6,stroke:#9F1239,stroke-width:2px,color:#0F172A,rx:10,ry:10,font-weight:700
-    classDef exp  fill:#CCFBF1,stroke:#0F766E,stroke-width:2px,color:#0F172A,rx:10,ry:10,font-weight:700
-
-    class A src
-    class B raw
-    class C nb
-    class D prc
-    class E dash
-    class F exp
+    %% Estilos
+    classDef gen fill:#DBEAFE,stroke:#1E40AF,stroke-width:2px,color:#0F172A
+    classDef data fill:#FFEDD5,stroke:#9A3412,stroke-width:2px,color:#0F172A
+    classDef proc fill:#EDE9FE,stroke:#5B21B6,stroke-width:2px,color:#0F172A
+    classDef out fill:#DCFCE7,stroke:#166534,stroke-width:2px,color:#0F172A
+    classDef mgmt fill:#E0E7FF,stroke:#3730A3,stroke-width:2px,color:#0F172A
+    
+    class GEN,CSV gen
+    class RAW,NB data
+    class PROC,MOD proc
+    class DASH,REP,PRED out
+    class CLI,CONF,CAT mgmt
 ```
 
 ### Organización de notebooks por especialidad
@@ -93,12 +109,16 @@ graph TD
 ```
 
 ## Estado actual
-- Notebooks organizados en subcarpetas por temática (Engineering, Architecture, Data Science, BI, OR, IoT, GenAI, Governance, Capstone, Utilidades).
-- Datos sintéticos disponibles en `data/raw/` y salidas en `data/processed/`.
-- Ejecución de notebooks verificada con `papermill` en entorno virtual.
-- **40 notebooks** implementados + 2 templates, 100% ejecutables, cubriendo 10 especialidades.
-- Sistema de navegación integrado entre notebooks.
+- **40 notebooks ejecutables** + 1 template en `00_common/`
+- Notebooks organizados en 10 subcarpetas por especialidad (DE, DA, DS, BA, OR, RT, GEN, DG, CAP, Utilidades)
+- Datos sintéticos generados localmente en `data/raw/` (no incluidos en git)
+- Salidas procesadas en `data/processed/` (no incluidas en git)
+- Ejecución verificada con `papermill` en Python 3.10+
+- 30 scripts de utilidades para validación, gestión y automatización
+- Sistema de navegación integrado entre notebooks
+- CLI unificado (`python -m scripts`) para gestión completa
 - CLI unificado para gestión y validación (`python -m scripts`).
+- 30 scripts utilitarios para validación, actualización y gestión de notebooks.
 
 ## Datos Sintéticos
 
@@ -252,8 +272,8 @@ supply-chain-data-notebooks/
 │   ├── data_dictionary.md           # Esquema de datos sintéticos
 │   ├── use_case_catalog.md          # Descripción detallada de cada notebook
 │   └── catalog.html                 # Catálogo interactivo (generado)
-├── notebooks/                       # 42 archivos .ipynb (40 ejecutables + 2 templates)
-│   ├── 00_common/                   # TEMPLATE.ipynb, PLANTILLA.ipynb
+├── notebooks/                       # 41 archivos .ipynb (40 ejecutables + 1 template)
+│   ├── 00_common/                   # TEMPLATE-notebook.ipynb
 │   ├── 10_data_engineering/         # 4 notebooks (DE-01 a DE-04)
 │   ├── 20_data_architecture/        # 2 notebooks (DA-01, DA-02)
 │   ├── 30_data_science_ml/          # 7 notebooks (DS-01 a DS-07)
@@ -264,7 +284,7 @@ supply-chain-data-notebooks/
 │   ├── 80_governance_quality/       # 1 notebook (DG-01)
 │   ├── 90_capstone_end2end/         # 1 notebook (CAP-01)
 │   └── 99_utilidades/               # 2 notebooks (AP-01, SI-09)
-├── scripts/                         # Herramientas CLI y validación (11 archivos)
+├── scripts/                         # Herramientas CLI y validación (30 archivos .py)
 │   ├── cli.py                       # CLI unificado principal (python -m scripts)
 │   ├── catalog.py                   # Listar, ejecutar, filtrar notebooks
 │   ├── update_navigation.py         # Actualizar navegación entre notebooks
@@ -272,8 +292,10 @@ supply-chain-data-notebooks/
 │   ├── export_catalog_html.py       # Generar catálogo HTML interactivo
 │   ├── smoke_test_notebooks.py      # Tests rápidos de ejecución
 │   ├── validate_requirements.py     # Validar dependencias
-│   ├── __init__.py, __main__.py     # Módulo Python
-│   └── README.md                    # Documentación completa de scripts
+│   ├── validate_notebooks_config.py # Validar sincronización config con notebooks
+│   ├── audit_*.py                   # Auditoría de notebooks y contextos
+│   ├── fix_*.py                     # Corrección automática de formato
+│   └── __init__.py, __main__.py     # Módulo Python
 ├── src/                             # Código reutilizable
 │   └── utils/                       # Configuración, I/O, logging, paths
 ├── tests/                           # Suite de tests
@@ -343,8 +365,8 @@ Tabla completa generada desde `config/notebooks_index.yml`.
 | GEN-02 | LLM para Análisis de Texto en Supply Chain | AI Generativa | Intermediate | [GEN-02-llm_text_analysis.ipynb](notebooks/70_ai_gen_agents/GEN-02-llm_text_analysis.ipynb) |
 | DG-01 | Perfilado de calidad de datos maestro | Data Governance | Intro | [DG-01-perfilado_calidad.ipynb](notebooks/80_governance_quality/DG-01-perfilado_calidad.ipynb) |
 | CAP-01 | Torre de control | Capstone | Intro | [CAP-01-torre_control.ipynb](notebooks/90_capstone_end2end/CAP-01-torre_control.ipynb) |
-| AP-01 | Apply en DataFrames - Tutorial de pandas | Utilidades | Intro | [AP-01-aplicar_todo_dataframe.ipynb](notebooks/99_utilidades/AP-01-aplicar_todo_dataframe.ipynb) |
-| SI-09 | Flujo ML end-to-end con scikit-learn | Utilidades | Intermediate | [SI-09-flujo_si9.ipynb](notebooks/99_utilidades/SI-09-flujo_si9.ipynb) |
+| AP-01 | Aplicar Todo DataFrame | Utilities | Intermediate | [AP-01-aplicar_todo_dataframe.ipynb](notebooks/99_utilidades/AP-01-aplicar_todo_dataframe.ipynb) |
+| SI-09 | Flujo Si9 - Automatización S&OP End-to-End | Utilities | Advanced | [SI-09-flujo_si9.ipynb](notebooks/99_utilidades/SI-09-flujo_si9.ipynb) |
 <!-- NOTEBOOKS-TABLE:END -->
 
 ## Recursos y Documentación
